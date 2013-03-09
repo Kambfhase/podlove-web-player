@@ -47,28 +47,22 @@
 				'</div>');
 
 
-			//TODO: dry this up
 			wrapper.find('.chaptertoggle').on('click.podlovewebplayer', function(){
 				$(this).closest('.podlovewebplayer_wrapper').find('.podlovewebplayer_chapterbox').podlovewebplayer('toggleHeight');
 			});
 
-			wrapper.find('.prevbutton').on('click.podlovewebplayer', function(event){
-				var player = $(this).closest('.podlovewebplayer_wrapper').data('player').get(0);
+			wrapper.find('.prevbutton').on('click.podlovewebplayer', function(){
+				var wrapper = $(this).closest('.podlovewebplayer_wrapper'),
+					curr = wrapper.find('.chaptertr.active');
 
-				if ((typeof player.currentTime === 'number')&&(player.currentTime > 0)) {
-					if(player.currentTime > chapterdiv.find('.active').data('start')+10) {
-						player.setCurrentTime(chapterdiv.find('.active').data('start'));
-					} else {
-						player.setCurrentTime(chapterdiv.find('.active').prev().data('start'));
-					}
-				} else {
-					player.play();
-				}
+				wrapper.podlovewebplayer('play', function( oldTime){
+					return oldTime > curr.data('start') + 10 ? curr.data('start') : curr.prev().data('start');
+				});
 			});
 
 			wrapper.find('.nextbutton').on('click.podlovewebplayer', function(){
 				var wrapper = $(this).closest('.podlovewebplayer_wrapper');
-console.log( wrapper.find('.chaptertr.active').next().data('start'))
+
 				wrapper.podlovewebplayer('play', wrapper.find('.chaptertr.active').next().data('start'));
 			});
 
@@ -339,7 +333,7 @@ $(wrapper).data('player', $(player));
 				if( $.isFunction(time)){
 					time = time.call( this, player.currentTime || 0);
 				}
-//debugger;
+
 				validTime = typeof time == 'number' && time >= 0;
 				if( !validTime) {
 					time = 0;
@@ -353,8 +347,6 @@ $(wrapper).data('player', $(player));
 				if( $(this).data('canplay')){
 					rawPlayer.play()
 					rawPlayer.setCurrentTime(time);
-					// Do we need this extra play?
-					//rawPlayer.play();
 				} else {
 					$(this).one('canplay.podlovewebplayer', function(){
 						$(this).data( 'canplay', true).podlovewebplayer( 'play', time);
