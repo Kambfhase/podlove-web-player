@@ -362,15 +362,14 @@ console.log(this);
 			'<tr class="chaptertr" data-start="" data-end="">'
 			+ '<td class="starttime"><span></span></td>'
 			+ '<td class="chaptername"></td>'
-			+ '<td class="timecode">\n'
-			+ '<span></span>\n'
-			+ '</td>\n'
+			+ '<td class="timecode"><span></span></td>'
 			+ '</tr>');
 
 			//attach events
 			generateChapterTable.div.on( 'click.podlovewebplayer', '.chaptertr', function(event){
 				event.preventDefault();
 
+				// I dont know, what the next if statement might be useful for.
 				if ( !( $(event.delegateTarget).find('table').hasClass('linked_all') || $(this).hasClass('loaded')))
 					return;
 
