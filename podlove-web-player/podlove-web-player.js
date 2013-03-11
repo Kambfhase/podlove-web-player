@@ -96,7 +96,28 @@
 				wrapper.podlovewebplayer( 'play', function(oldTime){
 					return oldTime + 30;
 				});
-			})
+			});
+
+			wrapper.find('a.infowindow').on('click.podlovewebplayer', function(){
+				var wrapper = $(this).closest('.podlovewebplayer_wrapper'),
+					summary = wrapper.find('.summary');
+
+				summary.podlovewebplayer('toggleHeight');
+			});
+
+			wrapper.find('a.showcontrols').on('click.podlovewebplayer', function(){
+				var wrapper = $(this).closest('.podlovewebplayer_wrapper');
+
+				wrapper.find('.podlovewebplayer_timecontrol').toggleClass('active');
+				wrapper.find('.podlovewebplayer_sharebuttons').removeClass('active');
+			});
+
+			wrapper.find('a.showsharebuttons').on('click.podlovewebplayer', function(){
+				var wrapper = $(this).closest('.podlovewebplayer_wrapper');
+
+				wrapper.find('.podlovewebplayer_sharebuttons').toggleClass('active');
+				wrapper.find('.podlovewebplayer_timecontrol').removeClass('active');
+			});
 
 			return wrapper;
 		}());
@@ -600,21 +621,6 @@ $(wrapper).data('player', $(player));
 		 */
 		if (metainfo.length === 1) {
 
-			metainfo.find('a.infowindow').click({player:player, summary: summary}, eventHandler.clickInfowindow);
-
-			metainfo.find('a.showcontrols').on('click', function(){
-				podlovewebplayer_timecontrol.toggleClass('active');
-				podlovewebplayer_sharebuttons.removeClass('active');
-
-				return false;
-			});
-
-			metainfo.find('a.showsharebuttons').on('click', function(){
-				podlovewebplayer_sharebuttons.toggleClass('active');
-				podlovewebplayer_timecontrol.removeClass('active');
-				return false;
-			});
-
 			metainfo.find('.bigplay').on('click', function(){
 				if($(this).hasClass('bigplay')) {
 					if((typeof player.currentTime === 'number')&&(player.currentTime > 0)) {
@@ -872,16 +878,6 @@ $(wrapper).data('player', $(player));
 		if (players.length === 1) {
 			fragment = 't=' + generateTimecode([e.data.player.currentTime]);
 			setFragmentURL(fragment);
-		}
-	};
-
-	var eventHandler = {
-		clickInfowindow: function(event){
-			event.preventDefault();
-
-			var summary = event.data.summary;
-
-			summary.podlovewebplayer('toggleHeight');
 		}
 	};
 	
