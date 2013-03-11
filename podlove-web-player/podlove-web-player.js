@@ -63,11 +63,13 @@
 			 * more that two or three times.
 			 *
 			 */
-			wrapper.find('.chaptertoggle').on('click.podlovewebplayer', function(){
+			wrapper.find('.chaptertoggle').on('click.podlovewebplayer', function( event ){
+				event.preventDefault();
 				$(this).closest('.podlovewebplayer_wrapper').find('.podlovewebplayer_chapterbox').podlovewebplayer('toggleHeight');
 			});
 
-			wrapper.find('.prevbutton').on('click.podlovewebplayer', function(){
+			wrapper.find('.prevbutton').on('click.podlovewebplayer', function( event ){
+				event.preventDefault();
 				var wrapper = $(this).closest('.podlovewebplayer_wrapper'),
 					curr = wrapper.find('.chaptertr.active');
 
@@ -76,13 +78,15 @@
 				});
 			});
 
-			wrapper.find('.nextbutton').on('click.podlovewebplayer', function(){
+			wrapper.find('.nextbutton').on('click.podlovewebplayer', function( event ){
+				event.preventDefault();
 				var wrapper = $(this).closest('.podlovewebplayer_wrapper');
 
 				wrapper.podlovewebplayer('play', wrapper.find('.chaptertr.active').next().data('start'));
 			});
 
-			wrapper.find('.rewindbutton').on('click.podlovewebplayer', function(){
+			wrapper.find('.rewindbutton').on('click.podlovewebplayer', function( event ){
+				event.preventDefault();
 				var wrapper = $(this).closest('.podlovewebplayer_wrapper');
 
 				wrapper.podlovewebplayer( 'play', function(oldTime){
@@ -90,7 +94,8 @@
 				});
 			});
 
-			wrapper.find('.forwardbutton').on('click.podlovewebplayer', function(){
+			wrapper.find('.forwardbutton').on('click.podlovewebplayer', function( event ){
+				event.preventDefault();
 				var wrapper = $(this).closest('.podlovewebplayer_wrapper');
 
 				wrapper.podlovewebplayer( 'play', function(oldTime){
@@ -98,21 +103,24 @@
 				});
 			});
 
-			wrapper.find('a.infowindow').on('click.podlovewebplayer', function(){
+			wrapper.find('a.infowindow').on('click.podlovewebplayer', function( event ){
+				event.preventDefault();
 				var wrapper = $(this).closest('.podlovewebplayer_wrapper'),
 					summary = wrapper.find('.summary');
 
 				summary.podlovewebplayer('toggleHeight');
 			});
 
-			wrapper.find('a.showcontrols').on('click.podlovewebplayer', function(){
+			wrapper.find('a.showcontrols').on('click.podlovewebplayer', function( event ){
+				event.preventDefault();
 				var wrapper = $(this).closest('.podlovewebplayer_wrapper');
 
 				wrapper.find('.podlovewebplayer_timecontrol').toggleClass('active');
 				wrapper.find('.podlovewebplayer_sharebuttons').removeClass('active');
 			});
 
-			wrapper.find('a.showsharebuttons').on('click.podlovewebplayer', function(){
+			wrapper.find('a.showsharebuttons').on('click.podlovewebplayer', function( event ){
+				event.preventDefault();
 				var wrapper = $(this).closest('.podlovewebplayer_wrapper');
 
 				wrapper.find('.podlovewebplayer_sharebuttons').toggleClass('active');
