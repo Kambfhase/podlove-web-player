@@ -46,7 +46,23 @@
 					'<div class="podlovewebplayer_tableend"></div>'+
 				'</div>');
 
-
+			/**
+			 * Below are the event handlers for various buttons. There are some design decions associated with
+			 * this code which is documented here, so this information will not be lost in the future. Hello,
+			 * future me, I am talking to you.
+			 *
+			 * `wrapper` in this scope is not the same wrapper that will later be in the HTML. It is barely a
+			 * template. This `wrapper` will be `.clone(true)`d to create the actual wrapper. The `true` is important
+			 * here. It means that events and data will be copied recursively to the newly created wrapper clone.
+			 * So all these functions below cannot use the `wrapper` here but instead have to go and find the
+			 * wrapper themselves.
+			 *
+			 * There is a second option which got rejected for sake of readability and flexibility. We could
+			 * just delegate all events from the wrapper. While this might be slightly faster at creation as 
+			 * well as at event execution the benefit would be rather small since people won't click a button
+			 * more that two or three times.
+			 *
+			 */
 			wrapper.find('.chaptertoggle').on('click.podlovewebplayer', function(){
 				$(this).closest('.podlovewebplayer_wrapper').find('.podlovewebplayer_chapterbox').podlovewebplayer('toggleHeight');
 			});
@@ -322,6 +338,26 @@ $(wrapper).data('player', $(player));
 		/**
 		 * Starts a player. To be called on a wrapper.
 		 * @param time (optional)
+		 *
+		 * The following `play` function unifies the various ways a player has to be started. There are three
+		 * basic ways to call this function.
+		 *
+		 * 1) `$('.podlovewebplay_wrapper').podlovewebplayer('play')`
+		 * This just starts a player from the very beginning. Yes, it has to be called on the wrapper since
+		 * that is the only element which has a reference to the player interface. Note: the player interface
+		 * is not the same as the `<audio>` element since that is useles when the flash fallback is active.
+		 * If you call this method on multiple wrappers at once all might start at the same time! If the track
+		 * is not yet loeaded, the player wil start as soon as possible.
+		 *
+		 * 2) `$('.podlovewebplay_wrapper').podlovewebplayer('play', 123)`
+		 * If you call the play method with a number as second argument, that is interpreted as the starting
+		 * time. The time is in seconds.
+		 *
+		 * 3) `$('.podlovewebplay_wrapper').podlovewebplayer('play', fn)`
+		 * If the player is called with a function as second argument instead of a number, that function is
+		 * called with `this` pointing to the wrapper and the first anf only argument being the time the player
+		 * is at right now. The return value of that function call is then processed as in case 2.
+		 *
 		 */
 		play: function ( time){
 			return this.each(function(){
