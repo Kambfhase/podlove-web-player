@@ -571,12 +571,6 @@ $(wrapper).data('player', $(player));
 			checkCurrentURL();
 		}
 
-		// get things straight for flash fallback
-		if (player.pluginType == 'flash') {
-			//TODO: this line is not reliable: the player might have not id
-			layoutedPlayer = $('#mep_' + player.id.substring(9));
-		}
-
 		// cache some jQ objects
 		var metainfo = wrapper.find('.podlovewebplayer_meta'),
 			summary = wrapper.find('.summary'),
