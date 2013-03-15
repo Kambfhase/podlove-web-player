@@ -295,7 +295,7 @@
 						) {
 
 					//set status variable
-					var richplayer = true;
+					richplayer = true;
 					
 					wrapper.addClass('podlovewebplayer_' + player.get(0).tagName.toLowerCase());
 
@@ -436,7 +436,7 @@ $(orig).replaceWith(wrapper);
 		 */
 		play: function ( time){
 			return this.each(function(){
-				var player = $(this).data('player'), rawPlayer, validTime, validPlayerTime;
+				var player = $(this).data('player'), rawPlayer, validTime;
 				if( !player) return;
 
 				rawPlayer = player.get(0);
@@ -456,7 +456,7 @@ $(orig).replaceWith(wrapper);
 				}
 
 				if( $(this).data('canplay')){
-					rawPlayer.play()
+					rawPlayer.play();
 					rawPlayer.setCurrentTime(time);
 				} else {
 					$(this).one('canplay.podlovewebplayer', function(){
@@ -618,9 +618,7 @@ $(orig).replaceWith(wrapper);
 			row.appendTo( tbody);
 		});
 
-		// chapters list
-		table.show()
-
+		table.show();
 		return div;
 	};
 
@@ -632,7 +630,6 @@ $(orig).replaceWith(wrapper);
 	 */
 	var addBehavior = function(player, params, wrapper) {
 		var jqPlayer = $(player),
-			layoutedPlayer = jqPlayer,
 			canplay = false;
 
 		/**
@@ -649,8 +646,6 @@ $(orig).replaceWith(wrapper);
 		// cache some jQ objects
 		var metainfo = wrapper.find('.podlovewebplayer_meta'),
 			summary = wrapper.find('.summary'),
-			podlovewebplayer_timecontrol = wrapper.find('.podlovewebplayer_timecontrol'),
-			podlovewebplayer_sharebuttons = wrapper.find('.podlovewebplayer_sharebuttons'),
 			chapterdiv = wrapper.find('.podlovewebplayer_chapterbox'),
 			list = wrapper.find('table'),
 			marks = list.find('tr');
@@ -852,21 +847,20 @@ $(orig).replaceWith(wrapper);
 
 	// update the chapter list when the data is loaded
 	var updateChapterMarks = function(player, marks) {
-		var doLinkMarks = marks.closest('table').hasClass('linked');
-
 		marks.each(function () {
 			var deepLink,
 				mark       = $(this),
 				startTime  = mark.data('start'),
 				endTime    = mark.data('end'),
 				isEnabled  = mark.data('enabled'),
+				isBuffered,
 				// isBuffered = player.buffered.end(0) > startTime,
 				isActive   = player.currentTime > startTime - 0.3 &&
 						player.currentTime <= endTime;
 
 			// prevent timing errors
 			if (player.buffered.length > 0) {
-			  var isBuffered = player.buffered.end(0) > startTime;
+				isBuffered = player.buffered.end(0) > startTime;
 			}
 
 			if (isActive) {
