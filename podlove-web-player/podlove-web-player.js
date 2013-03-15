@@ -336,8 +336,7 @@
 					stopAtTime = deepLink[1];
 				}
 
-				// init MEJS to player
-				mejsoptions.success = function (player) {
+				wrapper.on('success.podlovewebplayer', function(event, player){
 					$(wrapper).data('player', $(player));
 					addBehavior(player, params, wrapper);
 					if (deepLink !== false && players.length === 1) {
@@ -345,11 +344,20 @@
 							scrollTop: $('.podlovewebplayer_wrapper:first').offset().top - 25
 						});
 					}
-				};
+				});
 
-				$(orig).replaceWith(wrapper);
-				$(player).mediaelementplayer(mejsoptions);
+				// init MEJS to player
+				mejsoptions.success = function (player) {
+					wrapper.trigger('success', player);
+				};
+wrapper.on('success.podlovewebplayer2',function(){
+	console.log($.contains(document.documentElement,this))
+});
+				
 $(wrapper).data('player', $(player));
+$(player).mediaelementplayer(mejsoptions);
+
+$(orig).replaceWith(wrapper);
 
 				return wrapper;
 			});
