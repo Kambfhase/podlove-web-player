@@ -86,13 +86,65 @@
 	</div>
 	<div id="qunit"></div>
 	<div id="qunit-fixture"></div>
-	<script src="/resources/qunit.js"></script>
-	<script src="/resources/tests.js"></script>
-
 	<script>
 
 test( 'Basics', function() {
-	ok( jQuery('#testplayer').pluginType !== 'flash' ,'Irgendwas sollte nativ abzuspielen sein.');
+	var wrapper = jQuery('#testplayer').closest('.podlovewebplayer_wrapper'),
+		player = wrapper.data('player');
+
+	ok( player, 'The player was successfully created')
+	ok( wrapper.data('canplay'), 'Der Player müsste spielen können.');
+	ok( player.get(0).pluginType !== 'flash' ,'Irgendein Format sollte nativ abzuspielen sein.');
+	
+	// Test if stuff is visible.
+	equal( wrapper.find('.chaptertr').length, 3, 'The basic player has three chapters');
+	ok( wrapper.find('table').is(':visible'), 'The chapters a visible');
+	ok( wrapper.find('.chaptertoggle').is(':visible'), 'The chapter toggler is visible');
+
+	ok( wrapper.find('.infowindow').is(':visible'), 'The info toggler is visible');
+});
+
+module('Basic Functionality');
+asyncTest( 'Tests Play/Pause', 2, function(){
+	var wrapper = jQuery('#testplayer').closest('.podlovewebplayer_wrapper'),
+		player = wrapper.data('player');
+
+	player.on('play', function(){
+		ok( true, 'Player plays');
+		player.on('pause', function(){
+			ok( true, 'Player paused');
+			start();
+		});
+		wrapper.podlovewebplayer('pause');
+	});
+
+	wrapper.podlovewebplayer('play');
+});
+asyncTest( 'Tests Play/Pause', 4, function(){
+	var wrapper = jQuery('#testplayer').closest('.podlovewebplayer_wrapper'),
+		player = wrapper.data('player'),
+		chapterbox = wrapper.find('.podlovewebplayer_chapterbox'),
+		height;
+
+	height = chapterbox.height();
+	ok( chapterbox.is(':visible'), 'Chapters are initally visible');
+
+	wrapper.find('.chaptertoggle').click();
+
+	// wait for the animation to complete
+	setTimeout(function(){
+		console.log(chapterbox.height());
+		ok( chapterbox.is(':hidden'), 'Chapters get hidden');
+		wrapper.find('.chaptertoggle').click();
+
+	}, 1000);
+	
+
+	setTimeout(function(){
+		ok( chapterbox.is(':visible'), 'Chapters are visible again');
+		equal( height, chapterbox.height(), 'The height of the chapterbox stays the same.');
+		start();
+	}, 2000);
 });
 
 	</script>
