@@ -494,7 +494,7 @@
 						} else {
 							$(this).data('podlovewebplayer').ready = true;
 						}
-					})
+					});
 
 				}
 			})
