@@ -53,7 +53,7 @@
 
 	<div id="extendedTests">
 		<p>
-			<audio>
+			<audio id="alltypes">
 				<source src="samples/podlove-test-track.mp4" type="audio/mp4">
 				<source src="samples/podlove-test-track.mp3" type="audio/mp3">
 				<source src="samples/podlove-test-track.ogg" type="audio/ogg; codecs=vorbis">
@@ -61,26 +61,19 @@
 			</audio>
 		</p>
 		<p>
-			<audio>
-				<source src="samples/podlove-test-track.mp3" type="audio/mp3">
-				<source src="samples/podlove-test-track.ogg" type="audio/ogg; codecs=vorbis">
-				<source src="samples/podlove-test-track.opus" type="audio/ogg; codecs=opus">
-			</audio>
-		</p>
-		<p>
-			<audio>
+			<audio id="mp3only">
 				<source src="samples/podlove-test-track.mp3" type="audio/mp3">
 			</audio>
 		</p>
 		<p>
-			<audio>
+			<audio id="modern">
 				<source src="samples/podlove-test-track.mp4" type="audio/mp4">
 				<source src="samples/podlove-test-track.opus" type="audio/ogg; codecs=opus">
 			</audio>
 		</p>
 		<p>
-			<audio>
-				<source src="samples/podlove-test-track.ogg" type="audio/ogg; codecs=vorbis">
+			<audio id="long">
+				<!-- hour long audio track here -->
 			</audio>
 		</p>
 	</div>
@@ -104,7 +97,12 @@ test( 'Basics', function() {
 	ok( wrapper.find('.infowindow').is(':visible'), 'The info toggler is visible');
 });
 
+
+
+/*****************************/
+
 module('Basic Functionality');
+
 asyncTest( 'Tests Play/Pause', 2, function(){
 	var wrapper = jQuery('#testplayer').closest('.podlovewebplayer_wrapper'),
 		player = wrapper.data('player');
@@ -120,7 +118,8 @@ asyncTest( 'Tests Play/Pause', 2, function(){
 
 	wrapper.podlovewebplayer('play');
 });
-asyncTest( 'Tests Play/Pause', 4, function(){
+
+asyncTest( 'Tests Chapter Toggle', 4, function(){
 	var wrapper = jQuery('#testplayer').closest('.podlovewebplayer_wrapper'),
 		player = wrapper.data('player'),
 		chapterbox = wrapper.find('.podlovewebplayer_chapterbox'),
@@ -143,6 +142,33 @@ asyncTest( 'Tests Play/Pause', 4, function(){
 	setTimeout(function(){
 		ok( chapterbox.is(':visible'), 'Chapters are visible again');
 		equal( height, chapterbox.height(), 'The height of the chapterbox stays the same.');
+		start();
+	}, 2000);
+});
+
+asyncTest( 'Tests Summary Toggle', 4, function(){
+	var wrapper = jQuery('#testplayer').closest('.podlovewebplayer_wrapper'),
+		player = wrapper.data('player'),
+		summary = wrapper.find('.summary'),
+		height;
+
+	height = summary.height();
+	ok( summary.is(':hidden'), 'Summary is initally hidden');
+
+	wrapper.find('.infowindow').click();
+
+	// wait for the animation to complete
+	setTimeout(function(){
+		console.log(summary.height());
+		ok( summary.is(':visible'), 'Summary gets visible');
+		wrapper.find('.infowindow').click();
+
+	}, 1000);
+	
+
+	setTimeout(function(){
+		ok( summary.is(':hidden'), 'Summary is hidden again');
+		equal( height, summary.height(), 'The height of the summary stays the same.');
 		start();
 	}, 2000);
 });
