@@ -382,20 +382,24 @@
 							scrollTop: $('.podlovewebplayer_wrapper:first').offset().top - 25
 						});
 					}
+					wrapper.trigger('ready');
 				});
+
+				if( params.ready){
+					wrapper.on('ready', params.ready);
+				}
+
+				if( params.success){
+					wrapper.on('success', params.success);
+				}
 
 				// init MEJS to player
 				mejsoptions.success = function (player) {
 					wrapper.trigger('success', player);
 				};
-wrapper.on('success.podlovewebplayer2',function(){
-	console.log($.contains(document.documentElement,this))
-});
-				
-$(wrapper).data('player', $(player));
-$(player).mediaelementplayer(mejsoptions);
-
-$(orig).replaceWith(wrapper);
+	
+				$(player).mediaelementplayer(mejsoptions);
+				$(orig).replaceWith(wrapper);
 
 				return wrapper;
 			});
@@ -474,6 +478,26 @@ $(orig).replaceWith(wrapper);
 			return this.each(function(){
 				$(this).data('player').get(0).pause();
 			});
+		}
+
+		/**
+		 * Bind an handler on the `ready` event or execute it, if the event has already been fired.
+		 */
+		ready: function(fn){
+			return this.each(function(){
+				if($(this).data('podlovewebplayer').ready){
+					fn.call(this);
+				} else {
+					$(this).one('ready', fn).one('ready', function(){
+						if( !$(this).data('podlovewebplayer')){
+							$(this).data('podlovewebplayer', {ready: true});
+						} else {
+							$(this).data('podlovewebplayer').ready = true;
+						}
+					})
+
+				}
+			})
 		}
 
 	};
