@@ -47,6 +47,16 @@
 				'</div>');
 
 			/**
+			 * Save all the data in a single namespace.
+			 */
+
+			wrapper.data('podlovewebplayer', {
+				ready : false,
+				player : null,
+				canplay : false
+			});
+
+			/**
 			 * Below are the event handlers for various buttons. There are some design decions associated with
 			 * this code which is documented here, so this information will not be lost in the future. Hello,
 			 * future me, I am talking to you.
