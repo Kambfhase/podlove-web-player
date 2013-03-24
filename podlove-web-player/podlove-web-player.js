@@ -8,6 +8,17 @@
 		// Timecode as described in http://podlove.org/deep-link/
 		// and http://www.w3.org/TR/media-frags/#fragment-dimensions
 		timecodeRegExp = /(?:(\d+):)?(\d+):(\d+)(\.\d+)?([,-](?:(\d+):)?(\d+):(\d+)(\.\d+)?)?/,
+
+		podlovewebplayer = $.fn.podlovewebplayer = function podlovewebplayer( method){
+			// this is the actual plugin
+			if( method in methods){
+				return methods[method].apply(this, [].slice.call(arguments,1));
+			} else if( typeof method === 'object' || !method){
+				return methods.init.apply( this, [].slice.call(arguments,0));
+			}
+
+			return this;
+		},
 		wrapperDummy = (function(){
 			// this function creates the dummy
 			var wrapper = $(
@@ -139,58 +150,57 @@
 
 			// Social foo
 
-			var social = {
-				'.currentbutton' : function( title, href){
+			var social = podlovewebplayer.social = {
+				'.currentbutton' : function( title, url){
 					window.prompt(
 						'This URL directly points to the current playback position',
-						href
+						url
 					);
 
 				},
-				'.tweetbutton' : function( title, href){
+				'.tweetbutton' : function( title, url){
 					window.open(
-						'https://twitter.com/share?text='+ encodeURI(title)+'&url='+encodeURI(href), 
+						'https://twitter.com/share?text='+ encodeURI(title)+'&url='+encodeURI(url), 
 						'tweet it', 
 						'width=550,height=420,resizable=yes'
 					);
 				},
-				'.fbsharebutton' : function( title, href){
+				'.fbsharebutton' : function( title, url){
 					window.open(
-						'http://www.facebook.com/share.php?t='+encodeURI(title)+'&u='+encodeURI(href),
+						'http://www.facebook.com/share.php?t='+encodeURI(title)+'&u='+encodeURI(url),
 						'share it',
 						'width=550,height=340,resizable=yes'
 					);
+				},
+				'.gplusbutton' : function( title, url){
+					window.open(
+						'https://plus.google.com/share?title='+encodeURI(title)+'&url='+encodeURI(url),
+						'plus it',
+						'width=550,height=420,resizable=yes'
+					);
+				},
+				'.adnbutton' : function( title, url){
+					window.open(
+						'https://alpha.app.net/intent/post?text='+encodeURI(title)+'%20'+encodeURI(url),
+						'plus it',
+						'width=550,height=420,resizable=yes'
+					);
+				},
+				'.mailbutton' : function( title, url){
+					window.location = 'mailto:?subject='+encodeURI(title)+'&body='+encodeURI(title)+'%20%3C'+encodeURI(url)+'%3E';
 				}
 			};
 
 			wrapper.find('.podlovewebplayer_sharebuttons').on('click.podlovewebplayer', function( event ){
 				var a = $(this).closest('.podlovewebplayer_wrapper').find('.episodetitle a');
 
-				$.each(social, function( selector, fn){
-					if( $(event.target).is(selector)){
+				$.each( social, function( selector, fn){
+					if( $(event.target).is(selector) ){
 						event.preventDefault();
 
 						fn(a.text(), a.attr('href'));
 					}
 				});
-			});
-
-			wrapper.find('.gplusbutton').on('click.podlovewebplayer', function( event ){
-				event.preventDefault();
-				var wrapper = $(this).closest('.podlovewebplayer_wrapper');
-				window.open('https://plus.google.com/share?title='+encodeURI(wrapper.find('.episodetitle a').text())+'&url='+encodeURI(wrapper.find('.episodetitle a').attr('href')), 'plus it', 'width=550,height=420,resizable=yes');
-			});
-
-			wrapper.find('.adnbutton').on('click.podlovewebplayer', function( event ){
-				event.preventDefault();
-				var wrapper = $(this).closest('.podlovewebplayer_wrapper');
-				window.open('https://alpha.app.net/intent/post?text='+encodeURI(wrapper.find('.episodetitle a').text())+'%20'+encodeURI(wrapper.find('.episodetitle a').attr('href')), 'plus it', 'width=550,height=420,resizable=yes');
-			});
-
-			wrapper.find('.mailbutton').on('click.podlovewebplayer', function( event ){
-				event.preventDefault();
-				var wrapper = $(this).closest('.podlovewebplayer_wrapper');
-				window.location = 'mailto:?subject='+encodeURI(wrapper.find('.episodetitle a').text())+'&body='+encodeURI(wrapper.find('.episodetitle a').text())+'%20%3C'+encodeURI(wrapper.find('.episodetitle a').attr('href'))+'%3E';
 			});
 
 			return wrapper;
@@ -528,17 +538,6 @@
 			})
 		}
 
-	};
-
-	// this is the actual plugin
-	$.fn.podlovewebplayer = function( method){
-		if( method in methods){
-			return methods[method].apply(this, [].slice.call(arguments,1));
-		} else if( typeof method === 'object' || !method){
-			return methods.init.apply( this, [].slice.call(arguments,0));
-		}
-
-		return this;
 	};
 
 	/**
