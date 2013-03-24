@@ -434,9 +434,9 @@
 		 * 1) `$('.podlovewebplay_wrapper').podlovewebplayer('play')`
 		 * This just starts a player from the very beginning. Yes, it has to be called on the wrapper since
 		 * that is the only element which has a reference to the player interface. Note: the player interface
-		 * is not the same as the `<audio>` element since that is useles when the flash fallback is active.
+		 * is not the same as the `<audio>` element since that is useless when the flash fallback is active.
 		 * If you call this method on multiple wrappers at once all might start at the same time! If the track
-		 * is not yet loeaded, the player wil start as soon as possible.
+		 * is not yet loaded, the player will start as soon as possible.
 		 *
 		 * 2) `$('.podlovewebplay_wrapper').podlovewebplayer('play', 123)`
 		 * If you call the play method with a number as second argument, that is interpreted as the starting
