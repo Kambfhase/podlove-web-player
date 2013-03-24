@@ -488,7 +488,7 @@
 			return this.each(function(){
 				$(this).data('player').get(0).pause();
 			});
-		}
+		},
 
 		/**
 		 * Bind an handler on the `ready` event or execute it, if the event has already been fired.
