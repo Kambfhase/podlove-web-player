@@ -327,12 +327,12 @@
 				});
 
 				//build rich player with meta data
-				if ( typeof params.chapters !== 'undefined' ||
-						typeof params.title !== 'undefined' ||
-						typeof params.subtitle !== 'undefined' ||
-						typeof params.summary !== 'undefined' ||
-						typeof params.poster !== 'undefined' ||
-						typeof $(player).attr('poster') !== 'undefined'
+				if ( params.chapters ||
+						params.title ||
+						params.subtitle ||
+						params.summary ||
+						params.poster ||
+						$(player).attr('poster')
 						) {
 
 					//set status variable
