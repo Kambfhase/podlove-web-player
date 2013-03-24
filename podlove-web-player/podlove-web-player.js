@@ -18,7 +18,7 @@
 
 			return this;
 		},
-		wrapperDummy = (function(){
+		wrapperDummy = podlovewebplayer.wrapperDummy = (function(){
 			// this function creates the dummy
 			var wrapper = $(
 				'<div class="podlovewebplayer_wrapper">'+
@@ -204,46 +204,51 @@
 			return wrapper;
 		}());
 
+	podlovewebplayer.defaults = {
+		mejsoptions : {
+			defaultVideoWidth: 480,
+			defaultVideoHeight: 270,
+			videoWidth: -1,
+			videoHeight: -1,
+			audioWidth: -1,
+			audioHeight: 30,
+			startVolume: 0.8,
+			loop: false,
+			enableAutosize: true,
+			features: ['current','progress','duration','tracks','volume','fullscreen'],
+			alwaysShowControls: false,
+			iPadUseNativeControls: false,
+			iPhoneUseNativeControls: false,
+			AndroidUseNativeControls: false,
+			alwaysShowHours: false,
+			showTimecodeFrameCount: false,
+			framesPerSecond: 25,
+			enableKeyboard: true,
+			pauseOtherPlayers: true,
+			duration: false,
+			plugins: ['flash', 'silverlight'],
+			pluginPath: './libs/mediaelement/build/',
+			flashName: 'flashmediaelement.swf',
+			silverlightName: 'silverlightmediaelement.xap'
+		},
+		params: {
+			chapterlinks: 'all',
+			width: '100%',
+			duration: false,
+			chaptersVisible: false,
+			timecontrolsVisible: false,
+			sharebuttonsVisible: false,
+			summaryVisible: false
+		}
+	};
+
 	var methods = {
 		init: function(options) {
 			// MEJS options default values
-			var mejsoptions = {
-				defaultVideoWidth: 480,
-				defaultVideoHeight: 270,
-				videoWidth: -1,
-				videoHeight: -1,
-				audioWidth: -1,
-				audioHeight: 30,
-				startVolume: 0.8,
-				loop: false,
-				enableAutosize: true,
-				features: ['current','progress','duration','tracks','volume','fullscreen'],
-				alwaysShowControls: false,
-				iPadUseNativeControls: false,
-				iPhoneUseNativeControls: false,
-				AndroidUseNativeControls: false,
-				alwaysShowHours: false,
-				showTimecodeFrameCount: false,
-				framesPerSecond: 25,
-				enableKeyboard: true,
-				pauseOtherPlayers: true,
-				duration: false,
-				plugins: ['flash', 'silverlight'],
-				pluginPath: './libs/mediaelement/build/',
-				flashName: 'flashmediaelement.swf',
-				silverlightName: 'silverlightmediaelement.xap'
-			};
+			var mejsoptions = $.extend({}, podlovewebplayer.defaults.mejsoptions);
 
 			// Additional parameters default values
-			var params = $.extend({}, {
-				chapterlinks: 'all',
-				width: '100%',
-				duration: false,
-				chaptersVisible: false,
-				timecontrolsVisible: false,
-				sharebuttonsVisible: false,
-				summaryVisible: false
-			}, options);
+			var params = $.extend({}, podlovewebplayer.defaults.params, options);
 
 			// turn each player in the current set into a Podlove Web Player
 			return this.map(function(index, player){
