@@ -8,7 +8,6 @@
 		// Timecode as described in http://podlove.org/deep-link/
 		// and http://www.w3.org/TR/media-frags/#fragment-dimensions
 		timecodeRegExp = /(?:(\d+):)?(\d+):(\d+)(\.\d+)?([,-](?:(\d+):)?(\d+):(\d+)(\.\d+)?)?/,
-
 		podlovewebplayer = $.fn.podlovewebplayer = function podlovewebplayer( method){
 			// this is the actual plugin
 			if( method in methods){
@@ -156,7 +155,6 @@
 						'This URL directly points to the current playback position',
 						url
 					);
-
 				},
 				'.tweetbutton' : function( title, url){
 					window.open(
