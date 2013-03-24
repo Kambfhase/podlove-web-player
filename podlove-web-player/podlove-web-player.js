@@ -139,22 +139,40 @@
 
 			// Social foo
 
-			wrapper.find('.currentbutton').on('click.podlovewebplayer', function( event ){
-				event.preventDefault();
-				var wrapper = $(this).closest('.podlovewebplayer_wrapper');
-				window.prompt('This URL directly points to the current playback position', wrapper.find('.episodetitle a').attr('href'));
-			});
+			var social = {
+				'.currentbutton' : function( title, href){
+					window.prompt(
+						'This URL directly points to the current playback position',
+						href
+					);
 
-			wrapper.find('.tweetbutton').on('click.podlovewebplayer', function( event ){
-				event.preventDefault();
-				var wrapper = $(this).closest('.podlovewebplayer_wrapper');
-				window.open('https://twitter.com/share?text='+encodeURI(wrapper.find('.episodetitle a').text())+'&url='+encodeURI(wrapper.find('.episodetitle a').attr('href')), 'tweet it', 'width=550,height=420,resizable=yes');
-			});
+				},
+				'.tweetbutton' : function( title, href){
+					window.open(
+						'https://twitter.com/share?text='+ encodeURI(title)+'&url='+encodeURI(href), 
+						'tweet it', 
+						'width=550,height=420,resizable=yes'
+					);
+				},
+				'.fbsharebutton' : function( title, href){
+					window.open(
+						'http://www.facebook.com/share.php?t='+encodeURI(title)+'&u='+encodeURI(href),
+						'share it',
+						'width=550,height=340,resizable=yes'
+					);
+				}
+			};
 
-			wrapper.find('.fbsharebutton').on('click.podlovewebplayer', function( event ){
-				event.preventDefault();
-				var wrapper = $(this).closest('.podlovewebplayer_wrapper');
-				window.open('http://www.facebook.com/share.php?t='+encodeURI(wrapper.find('.episodetitle a').text())+'&u='+encodeURI(wrapper.find('.episodetitle a').attr('href')), 'share it', 'width=550,height=340,resizable=yes');
+			wrapper.find('.podlovewebplayer_sharebuttons').on('click.podlovewebplayer', function( event ){
+				var a = $(this).closest('.podlovewebplayer_wrapper').find('.episodetitle a');
+
+				$.each(social, function( selector, fn){
+					if( $(event.target).is(selector)){
+						event.preventDefault();
+
+						fn(a.text(), a.attr('href'));
+					}
+				});
 			});
 
 			wrapper.find('.gplusbutton').on('click.podlovewebplayer', function( event ){
