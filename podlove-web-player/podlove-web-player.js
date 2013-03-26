@@ -147,6 +147,31 @@
 				wrapper.find('.podlovewebplayer_timecontrol').removeClass('active');
 			});
 
+			wrapper.find('.bigplay').on('click', function( event ){
+				event.preventDefault();
+
+				var $this = $(this),
+					wrapper = $this.closest('.podlovewebplayer_wrapper'),
+					player = wrapper.data('player');
+
+				// TODO: what does the following condition imply?
+				if((typeof player.currentTime === 'number')&&(player.currentTime > 0)) {
+					if (player.paused) {
+						$this.addClass('playing');
+						player.play();
+					} else {
+						$this.removeClass('playing');
+						player.pause();
+					}
+				} else {
+					if(!$this.hasClass('playing')) {
+						$this.addClass('playing');
+						$this.parent().parent().find('.mejs-time-buffering').show();
+					}
+					player.play();
+				}
+			});
+
 			// Social foo
 
 			var social = podlovewebplayer.social = {
@@ -724,26 +749,7 @@
 		 */
 		if (metainfo.length === 1) {
 
-			metainfo.find('.bigplay').on('click', function(){
-				if($(this).hasClass('bigplay')) {
-					if((typeof player.currentTime === 'number')&&(player.currentTime > 0)) {
-						if (player.paused) {
-							$(this).parent().find('.bigplay').addClass('playing');
-							player.play();
-						} else {
-							$(this).parent().find('.bigplay').removeClass('playing');
-							player.pause();
-						}
-					} else {
-						if(!$(this).parent().find('.bigplay').hasClass('playing')) {
-							$(this).parent().find('.bigplay').addClass('playing');
-							$(this).parent().parent().find('.mejs-time-buffering').show();
-						}
-						player.play();
-					}
-				}
-				return false;
-			});
+			
 		}
 
 		// wait for the player or you'll get DOM EXCEPTIONS
