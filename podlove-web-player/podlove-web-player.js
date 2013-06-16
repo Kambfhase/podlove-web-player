@@ -154,21 +154,11 @@
 					wrapper = $this.closest('.podlovewebplayer_wrapper'),
 					player = wrapper.data('player');
 
-				// TODO: what does the following condition imply?
-				if((typeof player.currentTime === 'number')&&(player.currentTime > 0)) {
-					if (player.paused) {
-						$this.addClass('playing');
-						player.play();
-					} else {
-						$this.removeClass('playing');
-						player.pause();
-					}
+				
+				if (player.prop('paused')) {
+					wrapper.podlovewebplayer('play');
 				} else {
-					if(!$this.hasClass('playing')) {
-						$this.addClass('playing');
-						$this.parent().parent().find('.mejs-time-buffering').show();
-					}
-					player.play();
+					wrapper.podlovewebplayer('pause');
 				}
 			});
 
@@ -440,13 +430,13 @@
 					stopAtTime = deepLink[1];
 				}
 
-				wrapper.on('success.podlovewebplayer', function(event, player){
+				wrapper.on('success.podlovewebplayer', function( event, player){
 					$(wrapper).data('player', $(player));
 					addBehavior(player, params, wrapper);
 					if (deepLink !== false && players.length === 1) {
-						$('html, body').delay(150).animate({
-							scrollTop: $('.podlovewebplayer_wrapper:first').offset().top - 25
-						});
+						//$('html, body').delay(150).animate({
+						//	scrollTop: $('.podlovewebplayer_wrapper:first').offset().top - 25
+						//});
 					}
 					wrapper.trigger('ready');
 				});
@@ -488,7 +478,7 @@
 		 * basic ways to call this function.
 		 *
 		 * 1) `$('.podlovewebplay_wrapper').podlovewebplayer('play')`
-		 * This just starts a player from the very beginning. Yes, it has to be called on the wrapper since
+		 * This just resumes a player. Yes, it has to be called on the wrapper since
 		 * that is the only element which has a reference to the player interface. Note: the player interface
 		 * is not the same as the `<audio>` element since that is useless when the flash fallback is active.
 		 * If you call this method on multiple wrappers at once all might start at the same time! If the track
@@ -511,15 +501,22 @@
 
 				rawPlayer = player.get(0);
 
+				// awesome function calling
 				if( $.isFunction(time)){
-					time = time.call( this, player.currentTime || 0);
+					time = time.call( this, rawPlayer.currentTime || 0);
 				}
+
+				// if `time` is not present, simply resume
+				if ( time == null){
+					time = rawPlayer.currentTime;
+				}
+				
 
 				validTime = typeof time == 'number' && time >= 0;
 				if( !validTime) {
 					time = 0;
 				}
-
+				
 				/* if deeplink, set url */
 				if( players.length === 1){
 					setFragmentURL('t=' + generateTimecode([time]));
@@ -528,6 +525,7 @@
 				if( $(this).data('canplay')){
 					rawPlayer.play();
 					rawPlayer.setCurrentTime(time);
+					$(this).find('.bigplay').addClass('playing');
 				} else {
 					$(this).one('canplay.podlovewebplayer', function(){
 						$(this).data( 'canplay', true).podlovewebplayer( 'play', time);
@@ -543,6 +541,7 @@
 		pause: function(){
 			return this.each(function(){
 				$(this).data('player').get(0).pause();
+				$(this).find('.bigplay').removeClass('playing');
 			});
 		},
 
@@ -563,7 +562,7 @@
 					});
 
 				}
-			})
+			});
 		}
 
 	};
