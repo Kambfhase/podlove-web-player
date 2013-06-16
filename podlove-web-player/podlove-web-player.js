@@ -782,20 +782,6 @@
 			jqPlayer.bind('timeupdate', function () {
 				updateChapterMarks(player, marks);
 			});
-
-			// update play/pause status
-			jqPlayer.bind('play playing', function(){
-				list.find('.paused').removeClass('paused');
-				if (metainfo.length === 1) {
-					metainfo.find('.bigplay').addClass('playing');
-				}
-			});
-			jqPlayer.bind('pause', function(){
-				if (metainfo.length === 1) {
-					metainfo.find('.bigplay').removeClass('playing');
-				}
-			});
-
 		});
 	};
 
