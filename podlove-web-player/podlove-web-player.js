@@ -297,6 +297,7 @@
 				//video params
 				} else if (player.tagName == 'VIDEO') {
 
+					// VGL Zeile 317
 					if (typeof params.height !== 'undefined') {
 						mejsoptions.videoWidth = params.width;
 						mejsoptions.videoHeight = params.height;
@@ -432,6 +433,7 @@
 				}
 
 				wrapper.on('success.podlovewebplayer', function( event, player){
+					$(wrapper).data('podlovewebplayer').player = $(player);
 					$(wrapper).data('player', $(player));
 					addBehavior(player, params, wrapper);
 					if (deepLink !== false && players.length === 1) {
@@ -498,26 +500,10 @@
 		 */
 		play: function ( time){
 			return this.each(function(){
-				var player = $(this).data('player'), rawPlayer, validTime;
+				var player = $(this).data('podlovewebplayer').player, rawPlayer, validTime;
 				if( !player) return;
 
 				rawPlayer = player.get(0);
-
-				// awesome function calling
-				if( $.isFunction(time)){
-					time = time.call( this, rawPlayer.currentTime || 0);
-				}
-
-				// if `time` is not present, simply resume playback
-				if ( time == null){
-					time = rawPlayer.currentTime;
-				}
-				
-
-				validTime = typeof time == 'number' && time >= 0;
-				if( !validTime) {
-					time = 0;
-				}
 				
 				/* if deeplink, set url */
 				if( players.length === 1){
@@ -526,7 +512,9 @@
 
 				if( $(this).data('canplay')){
 					rawPlayer.play();
-					rawPlayer.setCurrentTime(time);
+					if( time != null){
+						$(this).podlovewebplayer('time', time);
+					}
 					$(this).find('.bigplay').addClass('playing');
 				} else {
 					$(this).one('canplay.podlovewebplayer', function(){
@@ -534,6 +522,43 @@
 					});
 				}
 
+			});
+		},
+
+		/**
+		 * Accessor for the currentTime property.
+		 * @param time (optional)
+		 *
+		 * This method changes a players currentTime property. If you want to make the player start playing
+		 * from a certain point of time immediately, refer to the `play` method instead. That takes an
+		 * optional time argument.
+		 * 
+		 * 1) `$('.podlovewebplay_wrapper').podlovewebplayer('time')`
+		 * When called without an argument, this methoed simply returns the currentTime
+		 * of the first player in the collection.
+		 *
+		 * 2) `$('.podlovewebplay_wrapper').podlovewebplayer('time', 123)`
+		 * Sets the time to be 123 and returns the jQuery collection.
+		 *
+		 * 3) `$('.podlovewebplay_wrapper').podlovewebplayer('time', fn)`
+		 * Awesome accessor functionality!
+		 */
+		time : function( time){
+			if( time == null){
+				return this.data('podlovewebplayer').player[0].currentTime;
+			}
+
+			return this.each(function(){
+				var player = $(this).data('podlovewebplayer').player.get(0),
+					newTime = $.isFunction(time) ? time.call( this, player.currentTime || 0) : time;
+
+				var validTime = typeof time == 'number' && time >= 0;
+				if( !validTime) {
+					time = 0;
+				}
+
+				// call the appropriate method for me.js
+				player.setCurrentTime(time);
 			});
 		},
 
