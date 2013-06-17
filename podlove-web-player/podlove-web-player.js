@@ -448,11 +448,11 @@
 				});
 
 				if( params.ready){
-					wrapper.on('ready', params.ready);
+					wrapper.on('ready.podlovewebplayer', params.ready);
 				}
 
 				if( params.success){
-					wrapper.on('success', params.success);
+					wrapper.on('success.podlovewebplayer', params.success);
 				}
 
 				// init MEJS to player
@@ -513,7 +513,7 @@
 					setFragmentURL('t=' + generateTimecode([time]));
 				}
 
-				if( $(this).data('canplay')){
+				if( $(this).data('podlovewebplayer').canplay){
 					rawPlayer.play();
 					if( time != null){
 						$(this).podlovewebplayer('time', time);
@@ -521,7 +521,8 @@
 					$(this).find('.bigplay').addClass('playing');
 				} else {
 					$(this).one('canplay.podlovewebplayer', function(){
-						$(this).data( 'canplay', true).podlovewebplayer( 'play', time);
+						$(this).podlovewebplayer( 'play', time);
+						$(this).data('podlovewebplayer').canplay = true;
 					});
 				}
 
@@ -733,8 +734,7 @@
 	 * @param player object
 	 */
 	var addBehavior = function(player, params, wrapper) {
-		var jqPlayer = $(player),
-			canplay = false;
+		var jqPlayer = $(player);
 
 		/**
 		 * The `player` is an interface. It provides the play and pause functionality. The
@@ -779,8 +779,7 @@
 
 		// wait for the player or you'll get DOM EXCEPTIONS
 		jqPlayer.bind('canplay', function () {
-			canplay = true;
-			$(wrapper).data( 'canplay', true);
+			$(wrapper).data( 'podlovewebplayer').canplay = true;
 
 			// add duration of final chapter
 			if (player.duration) {
