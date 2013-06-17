@@ -1,4 +1,4 @@
-(function($) {
+(function($, undefined) {
 	'use strict';
 
 	var startAtTime = false,
@@ -434,9 +434,9 @@
 					$(wrapper).data('player', $(player));
 					addBehavior(player, params, wrapper);
 					if (deepLink !== false && players.length === 1) {
-						//$('html, body').delay(150).animate({
-						//	scrollTop: $('.podlovewebplayer_wrapper:first').offset().top - 25
-						//});
+						$('html, body').delay(150).animate({
+							scrollTop: $('.podlovewebplayer_wrapper:first').offset().top - 25
+						});
 					}
 					wrapper.trigger('ready');
 				});
@@ -453,9 +453,10 @@
 				mejsoptions.success = function (player) {
 					wrapper.trigger('success', player);
 				};
-	
-				$(player).mediaelementplayer(mejsoptions);
+
 				$(orig).replaceWith(wrapper);
+				$(player).mediaelementplayer(mejsoptions);
+				
 
 				return wrapper;
 			});
@@ -560,7 +561,6 @@
 							$(this).data('podlovewebplayer').ready = true;
 						}
 					});
-
 				}
 			});
 		}
