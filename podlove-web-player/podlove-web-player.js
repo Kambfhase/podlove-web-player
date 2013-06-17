@@ -147,12 +147,12 @@
 				wrapper.find('.podlovewebplayer_timecontrol').removeClass('active');
 			});
 
-			wrapper.find('.bigplay').on('click', function( event ){
+			wrapper.find('.bigplay').on('click.podlovewebplayer', function( event ){
 				event.preventDefault();
 
 				var $this = $(this),
 					wrapper = $this.closest('.podlovewebplayer_wrapper'),
-					player = wrapper.data('player');
+					player = wrapper.data('podlovewebplayer').player;
 
 				
 				if (player.prop('paused')) {
@@ -327,10 +327,12 @@
 				}
 
 				var orig = $(player);
-				player = orig.clone();
-				var wrapper = wrapperDummy.clone(true,true);
-					wrapper.find('audio').replaceWith(player);
 
+				player = orig.clone();
+
+				var wrapper = wrapperDummy.clone(true,true);
+
+				wrapper.find('audio').replaceWith(player);
 				wrapper.css( 'width', params.width);
 
 				var deepLink;
@@ -434,6 +436,7 @@
 
 				wrapper.on('success.podlovewebplayer', function( event, player){
 					$(wrapper).data('podlovewebplayer').player = $(player);
+					// TODO: Eventually the following line should be removed
 					$(wrapper).data('player', $(player));
 					addBehavior(player, params, wrapper);
 					if (deepLink !== false && players.length === 1) {
@@ -577,7 +580,7 @@
 		 */
 		ready: function(fn){
 			return this.each(function(){
-				if($(this).data('podlovewebplayer').ready){
+				if( $(this).data('podlovewebplayer').ready){
 					fn.call(this);
 				} else {
 					$(this).one('ready', fn).one('ready', function(){
