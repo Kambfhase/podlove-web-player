@@ -257,7 +257,8 @@
 		}
 	};
 
-	var methods = {
+	// TODO: fallback for Object.create
+	var methods = podlovewebplayer.methods = {
 		init: function(options) {
 			// MEJS options default values
 			var mejsoptions = $.extend({}, podlovewebplayer.defaults.mejsoptions);
@@ -364,10 +365,10 @@
 							}
 						});
 
-						if (typeof params.poster !== 'undefined') {
+						if ( params.poster ) {
 							wrapper.find('.coverart > img').attr('src', params.poster);
 						}
-						if (typeof $(player).attr('poster') !== 'undefined') {
+						if ( $(player).attr('poster') ) {
 							wrapper.find('.coverart > img').attr('src', $(player).attr('poster'));
 						}
 					}
@@ -378,14 +379,14 @@
 						wrapper.append('<div class="podlovewebplayer_meta"></div>');
 					}
 					
-					if (typeof params.title !== 'undefined') {
-						if (typeof params.permalink !== 'undefined') {
+					if ( params.title ) {
+						if ( params.permalink ) {
 							wrapper.find('.episodetitle > a').attr('href', params.permalink).html( params.title);
 						} else {
 							wrapper.find('.episodetitle').html( params.title);
 						}
 					}
-					if (typeof params.subtitle !== 'undefined') {
+					if ( params.subtitle ) {
 						wrapper.find('.subtitle').html( params.subtitle);
 					}
 
@@ -411,7 +412,7 @@
 				}*/
 
 				//build chapter table
-				if (typeof params.chapters !== 'undefined') {
+				if ( params.chapters ) {
 					haschapters = true;
 
 					wrapper.find('.podlovewebplayer_chapterbox').replaceWith(generateChapterTable(params));
@@ -507,7 +508,7 @@
 					time = time.call( this, rawPlayer.currentTime || 0);
 				}
 
-				// if `time` is not present, simply resume
+				// if `time` is not present, simply resume playback
 				if ( time == null){
 					time = rawPlayer.currentTime;
 				}
@@ -555,17 +556,14 @@
 					fn.call(this);
 				} else {
 					$(this).one('ready', fn).one('ready', function(){
-						if( !$(this).data('podlovewebplayer')){
-							$(this).data('podlovewebplayer', {ready: true});
-						} else {
-							$(this).data('podlovewebplayer').ready = true;
-						}
+						$(this).data('podlovewebplayer').ready = true;
 					});
 				}
 			});
 		}
 
 	};
+
 
 	/**
 	 * Given a list of chapters, this function creates the chapter table for the player.
@@ -596,7 +594,7 @@
 			generateChapterTable.div.on( 'click.podlovewebplayer', '.chaptertr', function(event){
 				event.preventDefault();
 
-				// I dont know, what the next if statement might be useful for.
+				// I dont know, what the next if-statement might be useful for.
 				if ( !( $(event.delegateTarget).find('table').hasClass('linked_all') || $(this).hasClass('loaded')))
 					return;
 
@@ -758,10 +756,10 @@
 
 			// add duration of final chapter
 			if (player.duration) {
-				marks.find('.timecode code').eq(-1).each(function(){
+				marks.find('.timecode code').last().text(function(){
 					var start = Math.floor($(this).closest('tr').data('start'));
 					var end = Math.floor(player.duration);
-					$(this).text(generateTimecode([end-start]));
+					return generateTimecode([end-start]);
 				});
 			}
 
