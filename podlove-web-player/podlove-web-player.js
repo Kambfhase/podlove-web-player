@@ -435,8 +435,6 @@
 
 				wrapper.on('success.podlovewebplayer', function( event, player){
 					$(wrapper).data('podlovewebplayer').player = $(player);
-					// TODO: Eventually the following line should be removed
-					$(wrapper).data('player', $(player));
 					addBehavior(player, params, wrapper);
 					if (deepLink !== false && players.length === 1) {
 						$('html, body').delay(150).animate({
@@ -570,7 +568,7 @@
 		 */
 		pause: function(){
 			return this.each(function(){
-				$(this).data('player').get(0).pause();
+				$(this).data('podlovewebplayer').player.get(0).pause();
 				$(this).find('.bigplay').removeClass('playing');
 			});
 		},
@@ -939,6 +937,7 @@
 				isBuffered = player.buffered.end(0) > startTime;
 			}
 
+			// TODO: I dont know, what the purpose of this is.
 			if (!isEnabled && isBuffered) {
 				//deepLink = '#t=' + generateTimecode([startTime, endTime]);
 				$(mark).data('enabled', true).addClass('loaded').find('a[rel=player]').removeClass('disabled');
