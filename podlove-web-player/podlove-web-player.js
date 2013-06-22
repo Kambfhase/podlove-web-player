@@ -500,7 +500,7 @@
 		 */
 		play: function ( time){
 			return this.each(function(){
-				var player = $(this).data('podlovewebplayer').player, rawPlayer, validTime;
+				var player = $(this).data('podlovewebplayer').player, rawPlayer;
 				if( !player) return;
 
 				rawPlayer = player.get(0);
@@ -553,13 +553,13 @@
 				var player = $(this).data('podlovewebplayer').player.get(0),
 					newTime = $.isFunction(time) ? time.call( this, player.currentTime || 0) : time;
 
-				var validTime = typeof time == 'number' && time >= 0;
+				var validTime = typeof newTime == 'number' && newTime >= 0;
 				if( !validTime) {
-					time = 0;
+					newTime = 0;
 				}
 
 				// call the appropriate method for me.js
-				player.setCurrentTime(time);
+				player.setCurrentTime(newTime);
 			});
 		},
 
