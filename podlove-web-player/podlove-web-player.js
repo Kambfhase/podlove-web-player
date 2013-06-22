@@ -599,22 +599,22 @@
 		// cache the templates and clone them later on
 		if( !generateChapterTable.div){
 			generateChapterTable.div = $(
-			'<div class="podlovewebplayer_chapterbox showonplay"><table class="podlovewebplayer_chapters">'
-			+ '<caption>Podcast Chapters</caption><thead><tr>'
-			+ '<th scope="col">Chapter Number</th>'
-			+ '<th scope="col">Start time</th>'
-			+ '<th scope="col">Title</th>'
-			+ '<th scope="col">Duration</th>'
-			+ '</tr></thead>'
-			+ '<tbody></tbody></table></div>');
+			'<div class="podlovewebplayer_chapterbox showonplay"><table class="podlovewebplayer_chapters">' +
+			'<caption>Podcast Chapters</caption><thead><tr>' +
+			'<th scope="col">Chapter Number</th>' +
+			'<th scope="col">Start time</th>' +
+			'<th scope="col">Title</th>' +
+			'<th scope="col">Duration</th>' +
+			'</tr></thead>' +
+			'<tbody></tbody></table></div>');
 			
 			//this is a "template" for each chapter row
 			generateChapterTable.rowDummy = $(
-			'<tr class="chaptertr" data-start="" data-end="">'
-			+ '<td class="starttime"><span></span></td>'
-			+ '<td class="chaptername"></td>'
-			+ '<td class="timecode"><span></span></td>'
-			+ '</tr>');
+			'<tr class="chaptertr" data-start="" data-end="">' +
+			'<td class="starttime"><span></span></td>' +
+			'<td class="chaptername"></td>' +
+			'<td class="timecode"><span></span></td>' +
+			'</tr>');
 
 			//attach events
 			generateChapterTable.div.on( 'click.podlovewebplayer', '.chaptertr', function(event){
