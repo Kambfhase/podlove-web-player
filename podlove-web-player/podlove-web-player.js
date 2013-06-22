@@ -470,7 +470,7 @@
 		 */
 		toggleHeight: function () {
 			return this.toggleClass('active').height(function(){
-				return $(this).hasClass('active') ? $(this).data('height') + 'px' : '0px';
+				return $(this).hasClass('active') ? $(this).data('height') : 0;
 			});
 		},
 
