@@ -753,7 +753,7 @@
 		// fix height of summary for better toggability
 		summary.height(function(i, h){
 			$(this).data('height', h);
-			return $(this).hasClass('active') ? h : 0
+			return $(this).hasClass('active') ? h : 0;
 		});
 
 		chapterdiv.height(function(){
