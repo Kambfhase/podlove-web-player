@@ -504,18 +504,18 @@
 				if( !player) return;
 
 				rawPlayer = player.get(0);
-				
-				/* if deeplink, set url */
-				if( players.length === 1){
-					setFragmentURL('t=' + generateTimecode([time]));
-				}
 
 				if( $(this).data('podlovewebplayer').canplay){
 					rawPlayer.play();
 					if( time != null){
 						$(this).podlovewebplayer('time', time);
 					}
-					$(this).find('.bigplay').addClass('playing');
+					var newTime = $(this).podlovewebplayer('time');
+
+					/* if deeplink, set url */
+					if( players.length === 1){
+						setFragmentURL('t=' + generateTimecode([newTime]));
+					}
 				} else {
 					$(this).one('canplay.podlovewebplayer', function(){
 						$(this).data('podlovewebplayer').canplay = true;
@@ -569,7 +569,6 @@
 		pause: function(){
 			return this.each(function(){
 				$(this).data('podlovewebplayer').player.get(0).pause();
-				$(this).find('.bigplay').removeClass('playing');
 			});
 		},
 
@@ -778,6 +777,13 @@
 				return generateTimecode([end-start]);
 			});
 		}
+
+		jqPlayer.on('play playing', function(){
+			wrapper.find('.bigplay').addClass('playing');
+		});
+		jqPlayer.on('pause', function(){
+			wrapper.find('.bigplay').removeClass('playing');
+		});
 
 		// wait for the player or you'll get DOM EXCEPTIONS
 		jqPlayer.bind('canplay', function () {
