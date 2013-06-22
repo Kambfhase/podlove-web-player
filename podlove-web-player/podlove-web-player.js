@@ -36,7 +36,7 @@
 							'<a href="#" class="showsharebuttons infobuttons icon-export" title="Show/hide sharing controls"></a>'+
 						'</div>'+
 					'</div>'+
-					'<div style="height: 0px;" class="summary">{SUMMARY}</div>'+
+					'<div class="summary">{SUMMARY}</div>'+
 					'<audio>{SOURCES}</audio>'+
 					'<div class="podlovewebplayer_timecontrol podlovewebplayer_controlbox">'+
 						'<a href="#" class="prevbutton infobuttons icon-to-start" title="Jump backward to previous chapter"></a>'+
@@ -751,18 +751,15 @@
 			marks = list.find('tr');
 
 		// fix height of summary for better toggability
-		summary.each(function() {
-			$(this).data('height', $(this).height());
-			if (!$(this).hasClass('active')) {
-				$(this).height('0px');
-			}
+		summary.height(function(i, h){
+			$(this).data('height', h);
+			return $(this).hasClass('active') ? h : 0
 		});
 
-		chapterdiv.each(function() {
-			$(this).data('height', $(this).find('.podlovewebplayer_chapters').height());
-			if (!$(this).hasClass('active')) {
-				$(this).height('0px');
-			}
+		chapterdiv.height(function(){
+			var h = $(this).find('.podlovewebplayer_chapters').height();
+			$(this).data('height', h);
+			return $(this).hasClass('active') ? h : 0;
 		});
 		
 		/**
