@@ -510,12 +510,6 @@
 					if( time != null){
 						$(this).podlovewebplayer('time', time);
 					}
-					var newTime = $(this).podlovewebplayer('time');
-
-					/* if deeplink, set url */
-					if( players.length === 1){
-						setFragmentURL('t=' + generateTimecode([newTime]));
-					}
 				} else {
 					$(this).one('canplay.podlovewebplayer', function(){
 						$(this).data('podlovewebplayer').canplay = true;
@@ -791,10 +785,11 @@
 
 			// add Deeplink Behavior if there is only one player on the site
 			if (players.length === 1) {
-				//jqPlayer.bind('play timeupdate', {player: player}, checkTime)
-				//	.bind('pause', {player: player}, addressCurrentTime);
-				// disabled 'cause it overrides chapter clicks
-				// bind seeked to addressCurrentTime
+				jqPlayer.bind('play timeupdate pause', function(){
+					var time = wrapper.podlovewebplayer('time');
+
+					location.hash = 't=' + generateTimecode([time]);
+				});
 
 				checkCurrentURL();
 
@@ -921,10 +916,6 @@
 		}
 	};
 
-	var setFragmentURL = function(fragment) {
-		location.hash = fragment;
-	};
-
 	var checkTime = function (e) {
 		if (players.length > 1) { return; }
 		var player = e.data.player;
@@ -938,14 +929,6 @@
 		if (stopAtTime !== false && player.currentTime >= stopAtTime) {
 			player.pause();
 			stopAtTime = false;
-		}
-	};
-
-	var addressCurrentTime = function(e) {
-		var fragment;
-		if (players.length === 1) {
-			fragment = 't=' + generateTimecode([e.data.player.currentTime]);
-			setFragmentURL(fragment);
 		}
 	};
 	
