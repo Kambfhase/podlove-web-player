@@ -926,26 +926,6 @@
 						player.currentTime <= endTime;
 			return isActive;
 		}).addClass('active');
-
-		marks.each(function () {
-			var deepLink,
-				mark       = $(this),
-				startTime  = mark.data('start'),
-				endTime    = mark.data('end'),
-				isEnabled  = mark.data('enabled'),
-				isBuffered;
-
-			// prevent timing errors
-			if (player.buffered.length > 0) {
-				isBuffered = player.buffered.end(0) > startTime;
-			}
-
-			// TODO: I dont know, what the purpose of this is.
-			if (!isEnabled && isBuffered) {
-				//deepLink = '#t=' + generateTimecode([startTime, endTime]);
-				$(mark).data('enabled', true).addClass('loaded').find('a[rel=player]').removeClass('disabled');
-			}
-		});
 	};
 
 	var checkTime = function (e) {
