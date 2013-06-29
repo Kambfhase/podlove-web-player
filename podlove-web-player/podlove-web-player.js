@@ -256,7 +256,6 @@
 		}
 	};
 
-	// TODO: fallback for Object.create
 	var methods = podlovewebplayer.methods = {
 		init: function(options) {
 			// MEJS options default values
@@ -457,6 +456,8 @@
 					wrapper.trigger('success', player);
 				};
 
+				// after 2 seconds check for errors
+				setTimeout($.proxy(methods.monitor, wrapper), 200);
 				$(orig).replaceWith(wrapper);
 				$(player).mediaelementplayer(mejsoptions);
 				
@@ -577,6 +578,25 @@
 					$(this).one('ready', fn).one('ready', function(){
 						$(this).data('podlovewebplayer').ready = true;
 					});
+				}
+			});
+		},
+
+		/**
+		 * Check for errors.
+		 */
+		monitor: function(){
+			return $(this).each(function(){
+				var player = $(this).data('podlovewebplayer').player,
+					rawPlayer = player.get(0);
+
+				// see if the player could load a resource
+				if( player.prop('pluginType') == 'native'){
+					if( player.prop('error') ){
+						console.log( 'The player failed to load any resource. Error code: ', player.prop('error').code);
+					}
+				} else {
+					// how do we find out, if the flash player could load a resource?
 				}
 			});
 		}
