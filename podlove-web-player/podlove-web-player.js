@@ -801,11 +801,22 @@
 				// handle browser history navigation
 				$(window).bind('hashchange onpopstate', checkCurrentURL);
 			}
+		});
 
-			// always update Chaptermarks though
-			jqPlayer.bind('timeupdate', function () {
-				updateChapterMarks(player, marks);
-			});
+		// always update Chaptermarks though
+		jqPlayer.bind('timeupdate', function () {
+			// update the chapter list when the data is loaded
+			marks.removeClass('active');
+
+			var time = wrapper.podlovewebplayer('time');
+
+			marks.filter(function(){
+				var mark       = $(this),
+					startTime  = mark.data('start'),
+					endTime    = mark.data('end'),
+					isActive   = time > startTime - 0.3 && time <= endTime;
+				return isActive;
+			}).addClass('active');
 		});
 	};
 
@@ -912,20 +923,6 @@
 
 	var setFragmentURL = function(fragment) {
 		location.hash = fragment;
-	};
-
-	// update the chapter list when the data is loaded
-	var updateChapterMarks = function(player, marks) {
-		marks.removeClass('active');
-
-		marks.filter(function(){
-			var mark       = $(this),
-				startTime  = mark.data('start'),
-				endTime    = mark.data('end'),
-				isActive   = player.currentTime > startTime - 0.3 &&
-						player.currentTime <= endTime;
-			return isActive;
-		}).addClass('active');
 	};
 
 	var checkTime = function (e) {
