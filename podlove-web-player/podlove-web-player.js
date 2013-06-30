@@ -23,34 +23,35 @@
 			var wrapper = $(
 				'<div class="podlovewebplayer_wrapper">'+
 					'<div class="podlovewebplayer_meta">'+
-						'<a class="bigplay" href="#"></a>'+
+						'<a class="bigplay" title="Play Episode" href="#"></a>'+
 						'<div class="coverart"><img src="samples/coverimage.png" alt=""></div>'+
 						'<h3 class="episodetitle">'+
 							'<a href="{URL}">{TITLE}</a>'+
 						'</h3>'+
 						'<div class="subtitle">{SUBTITLE}</div>'+
 						'<div class="togglers">'+
-							'<a href="#" class="infowindow infobuttons icon-info-circle" title="More information about this"></a>'+
-							'<a href="#" class="chaptertoggle infobuttons icon-list-bullet" title="Show/hide chapters"></a>'+
-							'<a href="#" class="showcontrols infobuttons icon-clock" title="Show/hide time navigation controls"></a>'+
-							'<a href="#" class="showsharebuttons infobuttons icon-export" title="Show/hide sharing controls"></a>'+
+							'<a href="#" class="infowindow infobuttons pwp-icon-info-circle" title="More information about this"></a>'+
+							'<a href="#" class="chaptertoggle infobuttons pwp-icon-list-bullet" title="Show/hide chapters"></a>'+
+							'<a href="#" class="showcontrols infobuttons pwp-icon-clock" title="Show/hide time navigation controls"></a>'+
+							'<a href="#" class="showsharebuttons infobuttons pwp-icon-export" title="Show/hide sharing controls"></a>'+
+							'<a href="#" class="showdownloadbuttons infobuttons pwp-icon-download" title="Show/hide download bar"></a>'+
 						'</div>'+
 					'</div>'+
-					'<div class="summary">{SUMMARY}</div>'+
+					'<div class="summary"><div class="summarydiv">{SUMMARY}</div></div>'+
 					'<audio>{SOURCES}</audio>'+
 					'<div class="podlovewebplayer_timecontrol podlovewebplayer_controlbox">'+
-						'<a href="#" class="prevbutton infobuttons icon-to-start" title="Jump backward to previous chapter"></a>'+
-						'<a href="#" class="nextbutton infobuttons icon-to-end" title="Jump to next chapter"></a>'+
-						'<a href="#" class="rewindbutton infobuttons icon-fast-bw" title="Rewind 30 seconds"></a>'+
-						'<a href="#" class="forwardbutton infobuttons icon-fast-fw" title="Fast forward 30 seconds"></a>'+
+						'<a class="prevbutton infobuttons pwp-icon-to-start" title="Jump backward to previous chapter" href="#"></a>'+
+						'<a class="nextbutton infobuttons pwp-icon-to-end" title="next chapter" href="#"></a>'+
+						'<a class="rewindbutton infobuttons pwp-icon-fast-bw" title="Rewind 30 seconds" href="#"></a>'+
+						'<a class="forwardbutton infobuttons pwp-icon-fast-fw" title="Fast forward 30 seconds" href="#"></a>'+
 					'</div>'+
 					'<div class="podlovewebplayer_sharebuttons podlovewebplayer_controlbox">'+
-						'<a href="#" class="currentbutton infobuttons icon-link" title="Get URL for this"></a>'+
-						'<a href="#" target="_blank" class="tweetbutton infobuttons icon-twitter" title="Share this on Twitter"></a>'+
-						'<a href="#" target="_blank" class="fbsharebutton infobuttons icon-facebook" title="Share this on Facebook"></a>'+
-						'<a href="#" target="_blank" class="gplusbutton infobuttons icon-gplus" title="Share this on Google+"></a>'+
-						'<a href="#" target="_blank" class="adnbutton infobuttons icon-appnet" title="Share this on App.net"></a>'+
-						'<a href="#" target="_blank" class="mailbutton infobuttons icon-mail" title="Share this via e-mail"></a>'+
+						'<a href="#" class="currentbutton infobuttons pwp-icon-link" title="Get URL for this"></a>'+
+						'<a href="#" target="_blank" class="tweetbutton infobuttons pwp-icon-twitter" title="Share this on Twitter"></a>'+
+						'<a href="#" target="_blank" class="fbsharebutton infobuttons pwp-icon-facebook" title="Share this on Facebook"></a>'+
+						'<a href="#" target="_blank" class="gplusbutton infobuttons pwp-icon-gplus" title="Share this on Google+"></a>'+
+						'<a href="#" target="_blank" class="adnbutton infobuttons pwp-icon-appnet" title="Share this on App.net"></a>'+
+						'<a href="#" target="_blank" class="mailbutton infobuttons pwp-icon-mail" title="Share this via e-mail"></a>'+
 					'</div>'+
 					'<div class="podlovewebplayer_chapterbox showonplay">{CHAPTERS}</div>'+
 					'<div class="podlovewebplayer_tableend"></div>'+
@@ -172,34 +173,34 @@
 				},
 				'.tweetbutton' : function( title, url){
 					window.open(
-						'https://twitter.com/share?text='+ encodeURI(title)+'&url='+encodeURI(url), 
+						'https://twitter.com/share?text='+ encodeURIComponent(title)+'&url='+encodeURIComponent(url), 
 						'tweet it', 
 						'width=550,height=420,resizable=yes'
 					);
 				},
 				'.fbsharebutton' : function( title, url){
 					window.open(
-						'http://www.facebook.com/share.php?t='+encodeURI(title)+'&u='+encodeURI(url),
+						'http://www.facebook.com/share.php?t='+encodeURIComponent(title)+'&u='+encodeURIComponent(url),
 						'share it',
 						'width=550,height=340,resizable=yes'
 					);
 				},
 				'.gplusbutton' : function( title, url){
 					window.open(
-						'https://plus.google.com/share?title='+encodeURI(title)+'&url='+encodeURI(url),
+						'https://plus.google.com/share?title='+encodeURIComponent(title)+'&url='+encodeURIComponent(url),
 						'plus it',
 						'width=550,height=420,resizable=yes'
 					);
 				},
 				'.adnbutton' : function( title, url){
 					window.open(
-						'https://alpha.app.net/intent/post?text='+encodeURI(title)+'%20'+encodeURI(url),
+						'https://alpha.app.net/intent/post?text='+encodeURIComponent(title)+'%20'+encodeURIComponent(url),
 						'plus it',
 						'width=550,height=420,resizable=yes'
 					);
 				},
 				'.mailbutton' : function( title, url){
-					window.location = 'mailto:?subject='+encodeURI(title)+'&body='+encodeURI(title)+'%20%3C'+encodeURI(url)+'%3E';
+					window.location = 'mailto:?subject='+encodeURIComponent(title)+'&body='+encodeURIComponent(title)+'%20%3C'+encodeURIComponent(url)+'%3E';
 				}
 			};
 
@@ -716,8 +717,9 @@
 			//this is a "template" for each chapter row
 			generateChapterTable.rowDummy = $(
 			'<tr class="chaptertr" data-start="" data-end="">' +
+			'<td class="chapterimage"></td>' +
 			'<td class="starttime"><span></span></td>' +
-			'<td class="chaptername"></td>' +
+			'<td class="chaptername"><span></span> </td>' +
 			'<td class="timecode"><span></span></td>' +
 			'</tr>');
 
@@ -740,7 +742,7 @@
 			table = div.children('table'),
 			tbody = table.children('tbody');
 
-		if (params.chaptersVisible === true) {
+		if (params.chaptersVisible === true || params.chaptersVisible === 'true') {
 			div.addClass('active');
 		}
 
@@ -750,55 +752,75 @@
 
 
 		//prepare row data
-		var tempchapters = [];
-		var maxchapterlength = 0;
-		var maxchapterstart  = 0;
+		var tempchapters = params.chapters,
+			maxchapterstart = 0;
 
 		//first round: kill empty rows and build structured object
-		$.each(params.chapters.split("\n"), function(i, chapter){
+		if (typeof params.chapters === 'string') {
+			tempchapters = [];
+			$.each(params.chapters.split("\n"), function (i, chapter) {
 
-			//exit early if this line contains nothing but whitespace
-			if( !/\S/.test(chapter)) return;
+				//exit early if this line contains nothing but whitespace
+				if (!/\S/.test(chapter)) {
+					return;
+				}
 
-			//extract the timestamp
-			var line = $.trim(chapter);
-			var tc = parseTimecode(line.substring(0,line.indexOf(' ')));
-			var chaptitle = $.trim(line.substring(line.indexOf(' ')));
-			tempchapters.push({start: tc[0], title: chaptitle });
+				//extract the timestamp
+				var line = $.trim(chapter),
+					tc = parseTimecode(line.substring(0, line.indexOf(' '))),
+					chaptitle = $.trim(line.substring(line.indexOf(' ')));
+				tempchapters.push({
+					start: tc[0],
+					code: chaptitle
+				});
+			});
+		} else {
+			// assume array of objects
+			$.each(tempchapters, function (key, value) {
+				value.code = value.title;
+				if (typeof value.start === 'string') {
+					value.start = parseTimecode(value.start)[0];
+				}
+			});
+		}
+
+		// order is not guaranteed: http://podlove.org/simple-chapters/
+		tempchapters = tempchapters.sort(function (a, b) {
+			return a.start - b.start;
 		});
 
 		//second round: collect more information
-		$.each(tempchapters, function(i){
-			var next = tempchapters[i+1];
+		maxchapterstart = Math.max.apply(Math,
+			$.map(tempchapters, function (value, i) {
+			var next = tempchapters[i + 1];
 
-			// exit early if this is the final chapter
-			if( !next) return;
-			
-			// we need this data for proper formatting
-			this.end = next.start;
-			if(Math.round(this.end-this.start) > maxchapterlength) {
-				maxchapterlength = Math.round(this.end-this.start);
-				maxchapterstart = Math.round(next.start);
+			// we use `this.end` to quickly calculate the duration in the next round
+			if (next) {
+				value.end = next.start;
 			}
-		});
 
+			// we need this data for proper formatting
+			return value.start;
+		}));
+
+		var anypicture = false;
 		//third round: build actual dom table
 		$.each(tempchapters, function(i){
 			var finalchapter = !tempchapters[i+1],
 				duration = Math.round(this.end-this.start),
-				forceHours = (maxchapterlength >= 3600),
+				forceHours,
 				row = rowDummy.clone();
 
 			//make sure the duration for all chapters are equally formatted
 			if (!finalchapter) {
-				this.duration = generateTimecode([duration], forceHours);
+				this.duration = generateTimecode([duration], false);
 			} else {
 				if (params.duration == 0) {
 					this.end = 9999999999;
 					this.duration = '…';
 				} else {
 					this.end = params.duration;
-					this.duration = generateTimecode([Math.round(this.end-this.start)], forceHours);
+					this.duration = generateTimecode([Math.round(this.end-this.start)], false);
 				}
 			}
 
@@ -810,19 +832,30 @@
 			//deeplink, start and end
 			row.attr({
 				'data-start': this.start,
-				'data-end' : this.end
+				'data-end' : this.end,
+				'data-img': this.image || ''
 			});
 
 			//if there is a chapter that starts after an hour, force '00:' on all previous chapters
 			forceHours = (maxchapterstart >= 3600);
 
 			//insert the chapter data
-			row.find('.starttime > span').text( generateTimecode([Math.round(this.start)], forceHours));
-			row.find('.chaptername').html(this.title);
+			row.find('.starttime > span').text( generateTimecode([Math.round(this.start)], true, forceHours));
+			row.find('.chaptername > span').html(this.code);
+			if( this.href){
+				$('<a>').attr('href', this.href).appendTo(row.find('.chaptername'));
+			}
+			if( this.image){
+				$('<img>').attr('src', this.image).appendTo(row.find('.chapterimage'));
+				anypicture = true;
+			}
 			row.find('.timecode > span').text( this.duration);
 
 			row.appendTo( tbody);
 		});
+		if(!anypicture){
+			table.find('.chapterimage').remove();
+		}
 
 		table.show();
 		return div;
@@ -847,22 +880,31 @@
 	 * @param forceHours bool (optional)
 	 * @return string
 	 **/
-	var generateTimecode = $.generateTimecode = function(times, forceHours) {
-		function generatePart(seconds) {
-			var part, hours, milliseconds;
+	var generateTimecode = $.generateTimecode = function (times, leadingZeros, forceHours) {
+		function generatePart(time) {
+			var part, hours, minutes, seconds, milliseconds;
 			// prevent negative values from player
-			if (!seconds || seconds <= 0) {
-				return forceHours ? '00:00:00' : '00:00';
+			if (!time || time <= 0) {
+				return (leadingZeros || !time) ? (forceHours ? '00:00:00' : '00:00') : '--';
 			}
 
-			// required (minutes : seconds)
-			part = zeroFill(Math.floor(seconds / 60) % 60, 2) + ':' +
-					zeroFill(Math.floor(seconds % 60) % 60, 2);
+			hours = Math.floor(time / 60 / 60);
+			minutes = Math.floor(time / 60) % 60;
+			seconds = Math.floor(time % 60) % 60;
+			milliseconds = Math.floor(time % 1 * 1000);
 
-			hours = zeroFill(Math.floor(seconds / 60 / 60), 2);
-			hours = hours === '00' && !forceHours ? '' : hours + ':';
-			milliseconds = zeroFill(Math.floor(seconds % 1 * 1000), 3);
-			milliseconds = milliseconds === '000' ? '' : '.' + milliseconds;
+			if (leadingZeros) {
+				// required (minutes : seconds)
+				part = zeroFill(minutes, 2) + ':' + zeroFill(seconds, 2);
+				hours = zeroFill(hours, 2);
+				hours = hours === '00' && !forceHours ? '' : hours + ':';
+				milliseconds = milliseconds ? '.' + zeroFill(milliseconds, 3) : '';
+			} else {
+				part = hours ? zeroFill(minutes, 2) : minutes.toString();
+				part += ':' + zeroFill(seconds, 2);
+				hours = hours ? hours + ':' : '';
+				milliseconds = milliseconds ? '.' + milliseconds : '';
+			}
 
 			return hours + part + milliseconds;
 		}
@@ -905,8 +947,8 @@
 				// hours
 				endTime += parts[6] ? parseInt( parts[6], 10) * 60 * 60 : 0;
 				// minutes
-				endTime += parseInt( parts[7], 10) * 60;
-				// seconds
+				endTime += parseInt( parts[7], 10) * seconds;
+				// 60
 				endTime += parseInt( parts[8], 10);
 				// milliseconds
 				endTime += parts[9] ? parseFloat( parts[9]) : 0;
