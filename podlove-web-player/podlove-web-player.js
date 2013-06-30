@@ -258,17 +258,23 @@
 
 	var methods = podlovewebplayer.methods = {
 		init: function(options) {
-			// MEJS options default values
-			var mejsoptions = $.extend({}, podlovewebplayer.defaults.mejsoptions);
-
-			// Additional parameters default values
-			var params = $.extend({}, podlovewebplayer.defaults.params, options);
-
 			// turn each player in the current set into a Podlove Web Player
 			return this.map(function(index, player){
 
 				var richplayer = false,
 					haschapters = false;
+
+				// MEJS options default values
+				var mejsoptions = $.extend({}, podlovewebplayer.defaults.mejsoptions);
+
+				// Additional parameters default values
+				var params = $.extend({}, podlovewebplayer.defaults.params, options);
+
+				var orig = $(player);
+
+				player = orig.clone();
+
+				var wrapper = wrapperDummy.clone(true,true);
 
 				//fine tuning params
 				if (params.width.toLowerCase() == 'auto') {
@@ -278,7 +284,7 @@
 				}
 
 				//audio params
-				if (player.tagName == 'AUDIO') {
+				if (player.is('audio')) {
 
 					if (typeof params.audioWidth !== 'undefined') {
 						params.width = params.audioWidth;
@@ -293,7 +299,7 @@
 					});
 
 				//video params
-				} else if (player.tagName == 'VIDEO') {
+				} else if (player.is('video')) {
 
 					// VGL Zeile 317
 					if (typeof params.height !== 'undefined') {
@@ -301,8 +307,8 @@
 						mejsoptions.videoHeight = params.height;
 					}
 
-					if (typeof $(player).attr('width') !== 'undefined') {
-						params.width = $(player).attr('width');
+					if (typeof player.attr('width') !== 'undefined') {
+						params.width = player.attr('width');
 					}
 				}
 
@@ -323,12 +329,6 @@
 				if (params.width == parseInt( params.width, 10)) {
 					params.width += 'px';
 				}
-
-				var orig = $(player);
-
-				player = orig.clone();
-
-				var wrapper = wrapperDummy.clone(true,true);
 
 				wrapper.find('audio').replaceWith(player);
 				wrapper.css( 'width', params.width);
