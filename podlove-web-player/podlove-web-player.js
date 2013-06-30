@@ -338,7 +338,7 @@
 				players.push(player);
 
 				//add params from html fallback area
-				$(player).find('[data-pwp]').each(function(){
+				player.find('[data-pwp]').each(function(){
 					params[$(this).data('pwp')] = $(this).html();
 					$(this).remove();
 				});
@@ -349,7 +349,7 @@
 						params.subtitle ||
 						params.summary ||
 						params.poster ||
-						$(player).attr('poster')
+						player.attr('poster')
 						) {
 
 					//set status variable
@@ -369,13 +369,13 @@
 						if ( params.poster ) {
 							wrapper.find('.coverart > img').attr('src', params.poster);
 						}
-						if ( $(player).attr('poster') ) {
-							wrapper.find('.coverart > img').attr('src', $(player).attr('poster'));
+						if ( player.attr('poster') ) {
+							wrapper.find('.coverart > img').attr('src', player.attr('poster'));
 						}
 					}
 
 					// TODO
-					if (player.tagName == "VIDEO") {
+					if (player.get(0).tagName == "VIDEO") {
 						wrapper.prepend('<div class="podlovewebplayer_top"></div>');
 						wrapper.append('<div class="podlovewebplayer_meta"></div>');
 					}
@@ -427,7 +427,7 @@
 				// parse deeplink
 				deepLink = parseTimecode(location.href);
 				if (deepLink !== false && players.length === 1) {
-					$(player).attr({preload: 'auto', autoplay: 'autoplay'});
+					player.attr({preload: 'auto', autoplay: 'autoplay'});
 					startAtTime = deepLink[0];
 					stopAtTime = deepLink[1];
 				}
@@ -459,7 +459,7 @@
 				// after 2 seconds check for errors
 				setTimeout($.proxy(methods.monitor, wrapper), 200);
 				$(orig).replaceWith(wrapper);
-				$(player).mediaelementplayer(mejsoptions);
+				player.mediaelementplayer(mejsoptions);
 				
 
 				return wrapper;
@@ -800,7 +800,7 @@
 
 		// wait for the player or you'll get DOM EXCEPTIONS
 		jqPlayer.bind('canplay', function () {
-			$(wrapper).data( 'podlovewebplayer').canplay = true;
+			wrapper.data( 'podlovewebplayer').canplay = true;
 
 			// add Deeplink Behavior if there is only one player on the site
 			if (players.length === 1) {
