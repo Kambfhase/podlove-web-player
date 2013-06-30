@@ -761,7 +761,8 @@
 			summary = wrapper.find('.summary'),
 			chapterdiv = wrapper.find('.podlovewebplayer_chapterbox'),
 			list = wrapper.find('table'),
-			marks = list.find('tr');
+			marks = list.find('tr'),
+			bigplay = wrapper.find('.bigplay');
 
 		// fix height of summary for better toggability
 		summary.height(function(i, h){
@@ -792,11 +793,9 @@
 			});
 		}
 
-		jqPlayer.on('play playing', function(){
-			wrapper.find('.bigplay').addClass('playing');
-		});
-		jqPlayer.on('pause', function(){
-			wrapper.find('.bigplay').removeClass('playing');
+		jqPlayer.on({
+			'play playing': $.proxy( bigplay, 'addClass', 'playing'),
+			'pause': $.proxy( bigplay, 'removeClass', 'playing')
 		});
 
 		// wait for the player or you'll get DOM EXCEPTIONS
