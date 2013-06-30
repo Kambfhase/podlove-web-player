@@ -233,6 +233,9 @@ function(){f.ajax({dataType:"html",url:d,success:function(e){c.find(".mejs-postr
 						'<a href="#" target="_blank" class="adnbutton infobuttons pwp-icon-appnet" title="Share this on App.net"></a>'+
 						'<a href="#" target="_blank" class="mailbutton infobuttons pwp-icon-mail" title="Share this via e-mail"></a>'+
 					'</div>'+
+					'<div class="podlovewebplayer_downloadbuttons podlovewebplayer_controlbox">'+
+						'<select name="downloads" class="fileselect" size="1"></select>'+ // onchange="this.value=this.options[this.selectedIndex].value;"
+					'</div>' +
 					'<div class="podlovewebplayer_chapterbox showonplay">{CHAPTERS}</div>'+
 					'<div class="podlovewebplayer_tableend"></div>'+
 				'</div>');
@@ -316,16 +319,24 @@ function(){f.ajax({dataType:"html",url:d,success:function(e){c.find(".mejs-postr
 				event.preventDefault();
 				var wrapper = $(this).closest('.podlovewebplayer_wrapper');
 
-				wrapper.find('.podlovewebplayer_timecontrol').toggleClass('active');
-				wrapper.find('.podlovewebplayer_sharebuttons').removeClass('active');
+				wrapper.find('.podlovewebplayer_timecontrol').toggleClass('active')
+					.siblings('.podlovewebplayer_controlbox').removeClass('active');
 			});
 
 			wrapper.find('a.showsharebuttons').on('click.podlovewebplayer', function( event ){
 				event.preventDefault();
 				var wrapper = $(this).closest('.podlovewebplayer_wrapper');
 
-				wrapper.find('.podlovewebplayer_sharebuttons').toggleClass('active');
-				wrapper.find('.podlovewebplayer_timecontrol').removeClass('active');
+				wrapper.find('.podlovewebplayer_sharebuttons').toggleClass('active')
+					.siblings('.podlovewebplayer_controlbox').removeClass('active');
+			});
+
+			wrapper.find('a.showdownloadbuttons').on('click.podlovewebplayer', function( event ){
+				event.preventDefault();
+				var wrapper = $(this).closest('.podlovewebplayer_wrapper');
+
+				wrapper.find('.podlovewebplayer_downloadbuttons').toggleClass('active')
+					.siblings('.podlovewebplayer_controlbox').removeClass('active');
 			});
 
 			wrapper.find('.bigplay').on('click.podlovewebplayer', function( event ){
