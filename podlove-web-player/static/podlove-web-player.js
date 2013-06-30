@@ -235,6 +235,8 @@ function(){f.ajax({dataType:"html",url:d,success:function(e){c.find(".mejs-postr
 					'</div>'+
 					'<div class="podlovewebplayer_downloadbuttons podlovewebplayer_controlbox">'+
 						'<select name="downloads" class="fileselect" size="1"></select>'+ // onchange="this.value=this.options[this.selectedIndex].value;"
+						'<a href="#" class="openfilebutton infobuttons pwp-icon-link-ext" title="Open"></a> ' +
+						'<a href="#" class="fileinfobutton infobuttons pwp-icon-info-circle" title="Info"></a> ' +
 					'</div>' +
 					'<div class="podlovewebplayer_chapterbox showonplay">{CHAPTERS}</div>'+
 					'<div class="podlovewebplayer_tableend"></div>'+
@@ -462,6 +464,9 @@ function(){f.ajax({dataType:"html",url:d,success:function(e){c.find(".mejs-postr
 					params = $.extend({}, podlovewebplayer.defaults.params, options),
 					orig = $(player),
 					wrapper = wrapperDummy.clone(true,true);
+
+				// every wrapper needs a fresh data object.
+				wrapper.data('podlovewebplayer', $.extend({}, wrapperDummy.data('podlovewebplayer')));
 
 				player = orig.clone();
 

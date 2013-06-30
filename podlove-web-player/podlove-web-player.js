@@ -285,6 +285,9 @@
 					orig = $(player),
 					wrapper = wrapperDummy.clone(true,true);
 
+				// every wrapper needs a fresh data object.
+				wrapper.data('podlovewebplayer', $.extend({}, wrapperDummy.data('podlovewebplayer')));
+
 				player = orig.clone();
 
 				//fine tuning params
