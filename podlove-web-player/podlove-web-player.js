@@ -265,16 +265,13 @@
 					haschapters = false;
 
 				// MEJS options default values
-				var mejsoptions = $.extend({}, podlovewebplayer.defaults.mejsoptions);
-
 				// Additional parameters default values
-				var params = $.extend({}, podlovewebplayer.defaults.params, options);
-
-				var orig = $(player);
+				var mejsoptions = $.extend({}, podlovewebplayer.defaults.mejsoptions),
+					params = $.extend({}, podlovewebplayer.defaults.params, options),
+					orig = $(player),
+					wrapper = wrapperDummy.clone(true,true);
 
 				player = orig.clone();
-
-				var wrapper = wrapperDummy.clone(true,true);
 
 				//fine tuning params
 				if (params.width.toLowerCase() == 'auto') {
@@ -301,7 +298,6 @@
 				//video params
 				} else if (player.is('video')) {
 
-					// VGL Zeile 317
 					if (typeof params.height !== 'undefined') {
 						mejsoptions.videoWidth = params.width;
 						mejsoptions.videoHeight = params.height;
@@ -357,7 +353,7 @@
 					
 					wrapper.addClass('podlovewebplayer_' + player.get(0).tagName.toLowerCase());
 
-					if(player.get(0).tagName == "AUDIO") {
+					if(player.is('audio')) {
 						
 						//kill play/pause button from miniplayer
 						$.each(mejsoptions.features, function(i){
@@ -366,16 +362,11 @@
 							}
 						});
 
-						if ( params.poster ) {
-							wrapper.find('.coverart > img').attr('src', params.poster);
-						}
-						if ( player.attr('poster') ) {
-							wrapper.find('.coverart > img').attr('src', player.attr('poster'));
-						}
+						wrapper.find('.coverart > img').attr('src', params.poster || player.attr('poster'));
 					}
 
 					// TODO
-					if (player.get(0).tagName == "VIDEO") {
+					if (player.is('video')) {
 						wrapper.prepend('<div class="podlovewebplayer_top"></div>');
 						wrapper.append('<div class="podlovewebplayer_meta"></div>');
 					}
@@ -387,10 +378,8 @@
 							wrapper.find('.episodetitle').html( params.title);
 						}
 					}
-					if ( params.subtitle ) {
-						wrapper.find('.subtitle').html( params.subtitle);
-					}
 
+					wrapper.find('.subtitle').html( params.subtitle);
 					
 					if (typeof params.summary !== 'undefined') {
 						wrapper.find('.summary').html(params.summary).toggleClass('active', params.summaryVisible);
@@ -432,14 +421,19 @@
 					stopAtTime = deepLink[1];
 				}
 
+				// this will be executed, one me.js is done initialising
 				wrapper.on('success.podlovewebplayer', function( event, player){
-					wrapper.data('podlovewebplayer').player = $(player);
-					addBehavior(player, params, wrapper);
+					var jqPlayer = $(player);
+					wrapper.data('podlovewebplayer').player = jqPlayer;
+					jqPlayer.podlovewebplayer('addBehavior', wrapper, params);
+
 					if (deepLink !== false && players.length === 1) {
 						$('html, body').delay(150).animate({
 							scrollTop: $('.podlovewebplayer_wrapper:first').offset().top - 25
 						});
 					}
+
+					// finally done
 					wrapper.trigger('ready');
 				});
 
@@ -599,6 +593,104 @@
 					// how do we find out, if the flash player could load a resource?
 				}
 			});
+		},
+
+		/**
+		 * add chapter behavior and deeplinking: skip to referenced
+		 * time position & write current time into address
+		 * @param player object
+		 */
+		addBehavior : function( wrapper, params) {
+			var jqPlayer = $(this);
+
+			/**
+			 * The `player` is an interface. It provides the play and pause functionality. The
+			 * `layoutedPlayer` on the other hand is a DOM element. In native mode, these two
+			 * are one and the same object. In Flash though the interface is a plain JS object.
+			 */
+				
+			if (players.length === 1) {
+				// check if deeplink is set
+				checkCurrentURL();
+			}
+
+			// cache some jQ objects
+			var metainfo = wrapper.find('.podlovewebplayer_meta'),
+				summary = wrapper.find('.summary'),
+				chapterdiv = wrapper.find('.podlovewebplayer_chapterbox'),
+				list = wrapper.find('table'),
+				marks = list.find('tr'),
+				bigplay = wrapper.find('.bigplay');
+
+			// fix height of summary for better toggability
+			summary.height(function(i, h){
+				$(this).data('height', h);
+				return $(this).hasClass('active') ? h : 0;
+			});
+
+			chapterdiv.height(function(){
+				var h = $(this).find('.podlovewebplayer_chapters').height();
+				$(this).data('height', h);
+				return $(this).hasClass('active') ? h : 0;
+			});
+			
+			/**
+			 * TODO: warum sollte metainfo jemals != 1 sein? Video?
+			 */
+			if (metainfo.length === 1) {
+
+				
+			}
+
+			// add duration of final chapter
+			if (jqPlayer.prop('duration')) {
+				marks.find('.timecode code').last().text(function(){
+					var start = Math.floor($(this).closest('tr').data('start'));
+					var end = Math.floor(jqPlayer.prop('duration'));
+					return generateTimecode([end-start]);
+				});
+			}
+
+			jqPlayer.on({
+				'play playing': $.proxy( bigplay, 'addClass', 'playing'),
+				'pause': $.proxy( bigplay, 'removeClass', 'playing')
+			});
+
+			// wait for the player or you'll get DOM EXCEPTIONS
+			// TODO: synchronise canplay
+			jqPlayer.bind('canplay', function () {
+				wrapper.data( 'podlovewebplayer').canplay = true;
+
+				// add Deeplink Behavior if there is only one player on the site
+				if (players.length === 1) {
+					jqPlayer.bind('play timeupdate pause', function(){
+						var time = wrapper.podlovewebplayer('time');
+
+						location.hash = 't=' + generateTimecode([time]);
+					});
+
+					checkCurrentURL();
+
+					// handle browser history navigation
+					$(window).bind('hashchange onpopstate', checkCurrentURL);
+				}
+			});
+
+			// always update Chaptermarks though
+			jqPlayer.bind('timeupdate', function () {
+				// update the chapter list when the data is loaded
+				marks.removeClass('active');
+
+				var time = wrapper.podlovewebplayer('time');
+
+				marks.filter(function(){
+					var mark       = $(this),
+						startTime  = mark.data('start'),
+						endTime    = mark.data('end'),
+						isActive   = time > startTime - 0.3 && time <= endTime;
+					return isActive;
+				}).addClass('active');
+			});
 		}
 
 	};
@@ -735,105 +827,6 @@
 		table.show();
 		return div;
 	};
-
-
-	/**
-	 * add chapter behavior and deeplinking: skip to referenced
-	 * time position & write current time into address
-	 * @param player object
-	 */
-	var addBehavior = function(player, params, wrapper) {
-		var jqPlayer = $(player);
-
-		/**
-		 * The `player` is an interface. It provides the play and pause functionality. The
-		 * `layoutedPlayer` on the other hand is a DOM element. In native mode, these two
-		 * are one and the same object. In Flash though the interface is a plain JS object.
-		 */
-			
-		if (players.length === 1) {
-			// check if deeplink is set
-			checkCurrentURL();
-		}
-
-		// cache some jQ objects
-		var metainfo = wrapper.find('.podlovewebplayer_meta'),
-			summary = wrapper.find('.summary'),
-			chapterdiv = wrapper.find('.podlovewebplayer_chapterbox'),
-			list = wrapper.find('table'),
-			marks = list.find('tr'),
-			bigplay = wrapper.find('.bigplay');
-
-		// fix height of summary for better toggability
-		summary.height(function(i, h){
-			$(this).data('height', h);
-			return $(this).hasClass('active') ? h : 0;
-		});
-
-		chapterdiv.height(function(){
-			var h = $(this).find('.podlovewebplayer_chapters').height();
-			$(this).data('height', h);
-			return $(this).hasClass('active') ? h : 0;
-		});
-		
-		/**
-		 * TODO: warum sollte metainfo jemals != 1 sein? Video?
-		 */
-		if (metainfo.length === 1) {
-
-			
-		}
-
-		// add duration of final chapter
-		if (player.duration) {
-			marks.find('.timecode code').last().text(function(){
-				var start = Math.floor($(this).closest('tr').data('start'));
-				var end = Math.floor(player.duration);
-				return generateTimecode([end-start]);
-			});
-		}
-
-		jqPlayer.on({
-			'play playing': $.proxy( bigplay, 'addClass', 'playing'),
-			'pause': $.proxy( bigplay, 'removeClass', 'playing')
-		});
-
-		// wait for the player or you'll get DOM EXCEPTIONS
-		jqPlayer.bind('canplay', function () {
-			wrapper.data( 'podlovewebplayer').canplay = true;
-
-			// add Deeplink Behavior if there is only one player on the site
-			if (players.length === 1) {
-				jqPlayer.bind('play timeupdate pause', function(){
-					var time = wrapper.podlovewebplayer('time');
-
-					location.hash = 't=' + generateTimecode([time]);
-				});
-
-				checkCurrentURL();
-
-				// handle browser history navigation
-				$(window).bind('hashchange onpopstate', checkCurrentURL);
-			}
-		});
-
-		// always update Chaptermarks though
-		jqPlayer.bind('timeupdate', function () {
-			// update the chapter list when the data is loaded
-			marks.removeClass('active');
-
-			var time = wrapper.podlovewebplayer('time');
-
-			marks.filter(function(){
-				var mark       = $(this),
-					startTime  = mark.data('start'),
-					endTime    = mark.data('end'),
-					isActive   = time > startTime - 0.3 && time <= endTime;
-				return isActive;
-			}).addClass('active');
-		});
-	};
-
 
 	/**
 	 * return number as string lefthand filled with zeros
