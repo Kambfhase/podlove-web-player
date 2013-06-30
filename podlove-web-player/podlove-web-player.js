@@ -433,7 +433,7 @@
 				}
 
 				wrapper.on('success.podlovewebplayer', function( event, player){
-					$(wrapper).data('podlovewebplayer').player = $(player);
+					wrapper.data('podlovewebplayer').player = $(player);
 					addBehavior(player, params, wrapper);
 					if (deepLink !== false && players.length === 1) {
 						$('html, body').delay(150).animate({
