@@ -52,10 +52,10 @@ Previously to version 2.0.6 the only way to hand the player the chapter informat
 
 The `chapters` property is an array containing any number of objects. Each object can have the following properties.
 	
-	* `title`: The current chapters title. (Type:string, mandatory)
-	* `start`: The offset time for the beginning of this chapter. (Type:string/NPT, mandatory)
-	* `img`: An optional cover image for this chapter. (Type:string/URL)
-	* `href`: An optional URL to be associated with this chapter. This could be a link to the article you are discussing. (Type:string/URL)
+ * `title`: The current chapters title. (Type:string, mandatory)
+ * `start`: The offset time for the beginning of this chapter. (Type:string/NPT, mandatory)
+ * `img`: An optional cover image for this chapter. (Type:string/URL)
+ * `href`: An optional URL to be associated with this chapter. This could be a link to the article you are discussing. (Type:string/URL)
 
 ## Downloads
 
