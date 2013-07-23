@@ -21,3 +21,7 @@ This is a more or less complete list of all available options.
 
 `title`: The title of the current shows episode. (Type:string)
 
+`permalink`: This field must contain an URL to this episode, usually a blog entry. (Type:string/URL)
+
+`duration`: The duration of this episode. (Type:string/time)
+
