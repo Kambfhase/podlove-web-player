@@ -1,0 +1,156 @@
+$bigFont: $font-size * 1.1;
+$mediumFont: $font-size * 0.833;
+$smallFont: $font-size * 0.667;
+
+.pwp-player {
+  & * {
+    box-sizing: content-box;
+  }
+
+  @include clearfix;
+  width: $width;
+  min-height: $height;
+  background: $dark;
+  color: $white;
+  font-size: $font-size;
+  font-family: $fontFamily;
+}
+
+.pwp-logo {
+  width: $logoSize;
+  height: $logoSize;
+}
+
+.pwp-play {
+  font-family: pwpfont;
+  font-style: normal;
+  font-weight: normal;
+  line-height: 1em;
+  speak: none;
+  color: #ffffff;
+  background: transparent;
+  float: left;
+  border: 8px solid white;
+  border-radius: 50px;
+  font-size: 36px;
+  padding: 6px 4px 12px 3px;
+  height: 32px;
+  width: 42px;
+  margin: 17px;
+  @include single-transition(none);
+  &.pwp-icon-pause {
+    padding: 6px 7px 12px 0px;
+  }
+}
+
+
+.pwp-heading {
+  $padding: 10px;
+  padding: 0px $padding; // 1px is the borderwidth of the logo
+  width: $headingWidth - $padding * 2;
+  min-height: $logoSize;
+  h1, h2, h3 {
+    font-family: $fontFamily;
+    font-weight: 300;
+    font-size: $bigFont;
+    line-height: 1.25em;
+    margin: 8px 0;
+  }
+  h1,
+  h3 {
+    font-size: $mediumFont;
+    font-weight: 400;
+    color: $darker;
+    margin: 0 0 10px 0;
+  }
+  h1 {
+    font-size: $smallFont;
+    margin: 4px 0;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+  }
+  h2 {
+    margin: 4px 0 8px;
+  }
+}
+
+.pwp-logo,
+.pwp-time,
+.pwp-progress-bar,
+.pwp-buttons,
+.pwp-heading {
+  float:left;
+}
+
+.pwp-progress-bar,
+.pwp-time {
+  display:inline-block;
+  background: $black;
+}
+
+$progressHeight: 30px;
+$timeWidth: 90px;
+
+.pwp-time {
+  $vPadding: 6px;
+  $hPaddingLong: 18px;
+  $hPaddingShort: 12px;
+
+  height: $progressHeight - $vPadding * 2;
+  width: $timeWidth - $hPaddingLong - $hPaddingShort;
+  padding-top: $vPadding + 1;
+  padding-bottom: $vPadding - 1;
+  font-size: $mediumFont;
+  letter-spacing: 0.1em;
+  line-height: 1.1em;
+
+  &.pwp-time-elapsed {
+    padding-left: $hPaddingLong;
+    padding-right: $hPaddingShort;
+  }
+  &.pwp-time-remaining {
+    padding-left: $hPaddingShort;
+    padding-right: $hPaddingLong;
+  }
+}
+
+.pwp-progress-bar {
+  width: $width - 2 * $timeWidth;
+  background: black;
+  height: $progressHeight;
+}
+
+.pwp-controls {
+  clear:left;
+  font-size: $smallFont;
+}
+
+.pwp-time-controls,
+.pwp-meta-controls {
+  list-style-type: none;
+  margin: 8px 12px; // 12px padding right aligns with play button
+  /*
+  -webkit-margin-before: 0;
+  -moz-margin-before: 0;
+  -webkit-margin-after: 0;
+  -moz-margin-after: 0;
+  -webkit-margin-start: 0;
+  -moz-margin-start: 0;
+  -webkit-margin-end: 0;
+  -moz-margin-end: 0;
+  */
+  -webkit-padding-start: 0;
+  -moz-padding-start: 0;
+  li {
+    margin: 0;
+    float:left;
+  }
+}
+
+.pwp-time-controls {
+  float:right;
+}
+
+.pwp-meta-controls {
+  float:left;
+}

@@ -1087,7 +1087,6 @@ if(typeof String.prototype.trim !== 'function') {
 				} else if (document.webkitHidden !== undefined) {
 					hiddenTab = document.webkitHidden;
 				}
-				
 				if (hiddenTab === true) {
 					$(player).attr({
 						preload: 'auto'

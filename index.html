@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>new Podlove-Webplayer Mockup</title>
+    <link rel="stylesheet" href="/css/pwp.css">
+</head>
+<body>
+
+<section id="pwp-player1" class="pwp-player">
+
+    <audio data-pwp="default">
+        <source src="/samples/podlove-test-track.mp4" type="audio/mp4"/>
+        <source src="/samples/podlove-test-track.mp3" type="audio/mpeg"/>
+        <source src="/samples/podlove-test-track.ogg" type="audio/ogg; codecs=vorbis"/>
+        <source src="/samples/podlove-test-track.opus" type="audio/ogg; codecs=opus"/>
+    </audio>
+
+    <img class="pwp-logo" src="/samples/coverimage.png">
+    <header class="pwp-heading">
+        <h1><a href="http://die-sondersendung.de">Sondersendung</a></h1>
+
+        <h2><a href="http://die-sondersendung.de/episode/3">SZ003 Bits werden aus Strom geschmiedet. Und Mate</a></h2>
+
+        <h3>Der dritte Tag aus dem Sendezentrum.</h3>
+    </header>
+    <div class="pwp-button pwp-button-big pwp-play pwp-icon-play"></div>
+
+    <div class="pwp-controls">
+        <span class="pwp-time pwp-time-elapsed">00:00:10</span>
+        <canvas width="410" height="30" class="pwp-progress-bar"></canvas>
+        <span class="pwp-time pwp-time-remaining">-00:10:10</span>
+    </div>
+
+    <div class="pwp-controls">
+        <ul class="pwp-meta-controls">
+            <li class="pwp-button pwp-open-info"><a class="pwp-icon-info-circle"></a></li>
+            <li class="pwp-button pwp-open-chapters"><a class="pwp-icon-list-bullet"></a></li>
+            <li class="pwp-button pwp-open-speakers"><a class="pwp-icon-user"></a></li>
+            <li class="pwp-button pwp-open-volume"><a class="pwp-icon-volume-up"></a></li>
+            <li class="pwp-button pwp-open-sharing"><a class="pwp-icon-export"></a></li>
+        </ul>
+        <ul class="pwp-time-controls">
+            <li class="pwp-button pwp-chapter-back"><a class="pwp-icon-to-start"></a></li>
+            <li class="pwp-button pwp-hop-back"><a class="pwp-icon-fast-bw"></a></li>
+            <li class="pwp-button pwp-hop-forward"><a class="pwp-icon-fast-fw"></a></li>
+            <li class="pwp-button pwp-chapter-forward"><a class="pwp-icon-to-end"></a></li>
+        </ul>
+    </div>
+    <div class="pwp-info">
+    </div>
+    <div class="pwp-chapters">
+    </div>
+    <div class="pwp-speakers">
+    </div>
+    <div class="pwp-volume">
+    </div>
+    <div class="pwp-sharing">
+    </div>
+</section>
+<script src="/js/lib/zepto.js"></script>
+<script src="/js/player.js"></script>
+<script src="/js/podlove-web-player.js"></script>
+<script>
+    //        jQuery('#podlovewebplayer_1')
+    // .podlovewebplayer(
+    var options = {
+                "pluginPath": "http:\/\/not-safe-for-work.de\/wp-content\/plugins\/podlove-podcasting-plugin-for-wordpress\/lib\/modules\/podlove_web_player\/player\/podlove-web-player\/static\/",
+                "alwaysShowHours": true,
+                "alwaysShowControls": true,
+                "timecontrolsVisible": false,
+                "summaryVisible": false,
+                "hidetimebutton": false,
+                "hidedownloadbutton": false,
+                "hidesharebutton": false,
+                "sharewholeepisode": false,
+                "loop": false,
+                "chapterlinks": "all",
+                "permalink": "http:\/\/not-safe-for-work.de\/nsfw075-tokamak-und-stellarator-jagen-dr-avogadro\/",
+                "title": "NSFW075 Tokamak und Stellarator jagen Dr. Avogadro",
+                "subtitle": "Fu\u00dfball, Augentropfen,  Waschtrockner, Integrationsgetr\u00e4nke, das neue Kilogramm und viel Film",
+                "summary": "Ohne R\u00fccksicht auf Wiederholungen kramen wir heute in unseren d\u00fcnnen Geschichte und klappern in Deutschland so beliebte Themen wie Fu\u00dfball und Bier ab, widmen uns dem Shameless Selfplugging und \u00fcben uns in Zweipotenzen. W\u00e4hrend Holgi nachdenkt, ob er sich das noch unangek\u00fcndigte iPhone unbedingt kaufen muss, r\u00e4soniert Tim \u00fcber seine Lieblingsfilme und ob man in der Vierzigern sich eigentlich noch von irgendwas nachhaltig pr\u00e4gen lassen kann.",
+                "poster": "http:\/\/meta.metaebene.me\/media\/nsfw\/not-safe-for-work-logo.jpg",
+                "duration": "03:14:25",
+                "chaptersVisible": false,
+                "features": ["current", "progress", "duration", "tracks", "fullscreen", "volume"],
+                "chapters": [
+                    {"start": "00:00:00.000", "title": "Intro", "href": "", "image": ""},
+                    {"start": "00:02:07.000", "title": "Holgis Reiseaktivit\u00e4ten", "href": "", "image": ""},
+                    {"start": "00:18:30.000", "title": "Fu\u00dfball", "href": "", "image": ""},
+                    {"start": "00:36:30.000", "title": "Augentropfen", "href": "", "image": ""},
+                    {"start": "00:44:08.000", "title": "IFA und Waschmaschinen", "href": "", "image": ""},
+                    {"start": "00:58:35.000", "title": "Politik", "href": "", "image": ""},
+                    {"start": "01:24:52.000", "title": "iPhone und Paket\u00f6ffnung", "href": "", "image": ""},
+                    {"start": "01:36:04.000", "title": "Postkarten", "href": "", "image": ""},
+                    {"start": "01:47:28.000", "title": "Kilogramm, H\u00f6rerpost", "href": "", "image": ""},
+                    {"start": "02:16:03.000", "title": "Filme", "href": "", "image": ""},
+                    {"start": "03:04:09.000", "title": "Freiheit-statt-Angst-Demo", "href": "", "image": ""},
+                    {"start": "03:10:17.000", "title": "Outro", "href": "", "image": ""}
+        ]};
+
+    podlove.player.init(options);</script>
+</body>
+</html>

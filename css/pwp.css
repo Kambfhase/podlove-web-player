@@ -1,0 +1,1704 @@
+@charset "UTF-8";
+@import url("http://fonts.googleapis.com/css?family=Open+Sans:400,300&subset=latin,latin-ext");
+/* line 17, /Library/Ruby/Gems/1.8/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font: inherit;
+  font-size: 100%;
+  vertical-align: baseline;
+}
+
+/* line 22, /Library/Ruby/Gems/1.8/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+html {
+  line-height: 1;
+}
+
+/* line 24, /Library/Ruby/Gems/1.8/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+ol, ul {
+  list-style: none;
+}
+
+/* line 26, /Library/Ruby/Gems/1.8/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+/* line 28, /Library/Ruby/Gems/1.8/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+caption, th, td {
+  text-align: left;
+  font-weight: normal;
+  vertical-align: middle;
+}
+
+/* line 30, /Library/Ruby/Gems/1.8/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+q, blockquote {
+  quotes: none;
+}
+/* line 103, /Library/Ruby/Gems/1.8/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+q:before, q:after, blockquote:before, blockquote:after {
+  content: "";
+  content: none;
+}
+
+/* line 32, /Library/Ruby/Gems/1.8/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+a img {
+  border: none;
+}
+
+/* line 116, /Library/Ruby/Gems/1.8/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section, summary {
+  display: block;
+}
+
+@font-face {
+  font-family: pwpfont;
+  text-rendering: optimizeLegibility;
+  src: url("../font/podlovefont.eot?62787671");
+  src: url("../font/podlovefont.eot?62787671#iefix") format("embedded-opentype"), url("../font/podlovefont.woff?62787671") format("woff"), url("../font/podlovefont.ttf?62787671") format("truetype"), url("../font/podlovefont.svg?62787671#pwpfont") format("svg");
+  font-weight: normal !important;
+  font-style: normal !important;
+}
+
+/* Chrome hack: SVG is rendered more smooth in Windozze. 100% magic, uncomment if you need it. */
+/* Note, that will break hinting! In other OS-es font will be not as sharp as it could be */
+/*
+@media screen and (-webkit-min-device-pixel-ratio:0) {
+  @font-face {
+    font-family: 'pwpfont';
+    src: url('../font/podlovefont.svg?62787671#pwpfont') format('svg');
+  }
+}
+*/
+/* line 26, ../sass/pwpfont.scss */
+[class^="pwp-icon-"]:before,
+[class*=" pwp-icon-"]:before {
+  font-family: pwpfont;
+  font-style: normal !important;
+  font-weight: normal !important;
+  text-decoration: inherit;
+  -webkit-font-smoothing: antialiased;
+  speak: none;
+  display: inline-block;
+  text-decoration: inherit;
+  width: 1em;
+  margin-right: 0.2em;
+  text-align: center;
+  /* opacity: 0.8; */
+  /* For safety - reset parent styles, that can break glyph codes*/
+  font-variant: normal !important;
+  text-transform: none !important;
+  /* fix buttons height, for twitter bootstrap */
+  line-height: 1em;
+  /* Animation center compensation - margins should be symmetric */
+  /* remove if not needed */
+  margin-left: 0.2em;
+  /* you can be more comfortable with increased icons size */
+  /* font-size: 120%; */
+  /* Uncomment for 3D effect */
+  /* text-shadow: 1px 1px 1px rgba(127, 127, 127, 0.3); */
+}
+
+/* line 59, ../sass/pwpfont.scss */
+.pwp-icon-gplus:before {
+  content: "\2b";
+}
+
+/* '+' */
+/* line 60, ../sass/pwpfont.scss */
+.pwp-icon-appstore:before {
+  content: "\41";
+}
+
+/* 'A' */
+/* line 61, ../sass/pwpfont.scss */
+.pwp-icon-twitter:before {
+  content: "\54";
+}
+
+/* 'T' */
+/* line 62, ../sass/pwpfont.scss */
+.pwp-icon-podcast:before {
+  content: "\60";
+}
+
+/* '`' */
+/* line 63, ../sass/pwpfont.scss */
+.pwp-icon-cloudapp:before {
+  content: "\63";
+}
+
+/* 'c' */
+/* line 64, ../sass/pwpfont.scss */
+.pwp-icon-facebook:before {
+  content: "\66";
+}
+
+/* 'f' */
+/* line 65, ../sass/pwpfont.scss */
+.pwp-icon-itunes:before {
+  content: "\69";
+}
+
+/* 'i' */
+/* line 66, ../sass/pwpfont.scss */
+.pwp-icon-soundcloud:before {
+  content: "\73";
+}
+
+/* 's' */
+/* line 67, ../sass/pwpfont.scss */
+.pwp-icon-appnet:before {
+  content: "\e1";
+}
+
+/* 'á' */
+/* line 68, ../sass/pwpfont.scss */
+.pwp-icon-statusnet:before {
+  content: "\e2";
+}
+
+/* 'â' */
+/* line 69, ../sass/pwpfont.scss */
+.pwp-icon-pause:before {
+  content: "\2389";
+}
+
+/* '⎉' */
+/* line 70, ../sass/pwpfont.scss */
+.pwp-icon-pause-1:before {
+  content: "\e800";
+}
+
+/* '' */
+/* line 71, ../sass/pwpfont.scss */
+.pwp-icon-fast-fw:before {
+  content: "\23e9";
+}
+
+/* '⏩' */
+/* line 72, ../sass/pwpfont.scss */
+.pwp-icon-fast-bw:before {
+  content: "\23ea";
+}
+
+/* '⏪' */
+/* line 73, ../sass/pwpfont.scss */
+.pwp-icon-to-end:before {
+  content: "\23ed";
+}
+
+/* '⏭' */
+/* line 74, ../sass/pwpfont.scss */
+.pwp-icon-to-start:before {
+  content: "\23ee";
+}
+
+/* '⏮' */
+/* line 75, ../sass/pwpfont.scss */
+.pwp-icon-play:before {
+  content: "\25b6";
+}
+
+/* '▶' */
+/* line 76, ../sass/pwpfont.scss */
+.pwp-icon-star:before {
+  content: "\e805";
+}
+
+/* '' */
+/* line 77, ../sass/pwpfont.scss */
+.pwp-icon-star-empty:before {
+  content: "\e806";
+}
+
+/* '' */
+/* line 78, ../sass/pwpfont.scss */
+.pwp-icon-th-list:before {
+  content: "\e80c";
+}
+
+/* '' */
+/* line 79, ../sass/pwpfont.scss */
+.pwp-icon-th:before {
+  content: "\e80e";
+}
+
+/* '' */
+/* line 80, ../sass/pwpfont.scss */
+.pwp-icon-cog-1:before {
+  content: "\e801";
+}
+
+/* '' */
+/* line 81, ../sass/pwpfont.scss */
+.pwp-icon-cog:before {
+  content: "\2699";
+}
+
+/* '⚙' */
+/* line 82, ../sass/pwpfont.scss */
+.pwp-icon-cog-alt:before {
+  content: "\26ef";
+}
+
+/* '⛯' */
+/* line 83, ../sass/pwpfont.scss */
+.pwp-icon-mail:before {
+  content: "\2709";
+}
+
+/* '✉' */
+/* line 84, ../sass/pwpfont.scss */
+.pwp-icon-edit:before {
+  content: "\e815";
+}
+
+/* '' */
+/* line 85, ../sass/pwpfont.scss */
+.pwp-icon-ok-circled:before {
+  content: "\e80d";
+}
+
+/* '' */
+/* line 86, ../sass/pwpfont.scss */
+.pwp-icon-cw:before {
+  content: "\27f3";
+}
+
+/* '⟳' */
+/* line 87, ../sass/pwpfont.scss */
+.pwp-icon-wordpress:before {
+  content: "\e005";
+}
+
+/* '' */
+/* line 88, ../sass/pwpfont.scss */
+.pwp-icon-github-1:before {
+  content: "\e0b6";
+}
+
+/* '' */
+/* line 89, ../sass/pwpfont.scss */
+.pwp-icon-github-text:before {
+  content: "\e0e5";
+}
+
+/* '' */
+/* line 90, ../sass/pwpfont.scss */
+.pwp-icon-help-circled:before {
+  content: "\e809";
+}
+
+/* '' */
+/* line 91, ../sass/pwpfont.scss */
+.pwp-icon-info-circle:before {
+  content: "\e705";
+}
+
+/* '' */
+/* line 92, ../sass/pwpfont.scss */
+.pwp-icon-tag:before {
+  content: "\e813";
+}
+
+/* '' */
+/* line 93, ../sass/pwpfont.scss */
+.pwp-icon-tags:before {
+  content: "\e814";
+}
+
+/* '' */
+/* line 94, ../sass/pwpfont.scss */
+.pwp-icon-export:before {
+  content: "\e715";
+}
+
+/* '' */
+/* line 95, ../sass/pwpfont.scss */
+.pwp-icon-down-circle2:before {
+  content: "\e758";
+}
+
+/* '' */
+/* line 96, ../sass/pwpfont.scss */
+.pwp-icon-terminal:before {
+  content: "\e7ac";
+}
+
+/* '' */
+/* line 97, ../sass/pwpfont.scss */
+.pwp-icon-ipod:before {
+  content: "\e7b2";
+}
+
+/* '' */
+/* line 98, ../sass/pwpfont.scss */
+.pwp-icon-ccw:before {
+  content: "\f025";
+}
+
+/* '' */
+/* line 99, ../sass/pwpfont.scss */
+.pwp-icon-link-ext:before {
+  content: "\f08e";
+}
+
+/* '' */
+/* line 100, ../sass/pwpfont.scss */
+.pwp-icon-rss:before {
+  content: "\e816";
+}
+
+/* '' */
+/* line 101, ../sass/pwpfont.scss */
+.pwp-icon-down-circled:before {
+  content: "\f0ab";
+}
+
+/* '' */
+/* line 102, ../sass/pwpfont.scss */
+.pwp-icon-list-bullet:before {
+  content: "\f0ca";
+}
+
+/* '' */
+/* line 103, ../sass/pwpfont.scss */
+.pwp-icon-gplus-squared:before {
+  content: "\f0d4";
+}
+
+/* '' */
+/* line 104, ../sass/pwpfont.scss */
+.pwp-icon-paste:before {
+  content: "\f0ea";
+}
+
+/* '' */
+/* line 105, ../sass/pwpfont.scss */
+.pwp-icon-download-cloud:before {
+  content: "\f0ed";
+}
+
+/* '' */
+/* line 106, ../sass/pwpfont.scss */
+.pwp-icon-plus-squared:before {
+  content: "\e80a";
+}
+
+/* '' */
+/* line 107, ../sass/pwpfont.scss */
+.pwp-icon-quote-left:before {
+  content: "\f10d";
+}
+
+/* '' */
+/* line 108, ../sass/pwpfont.scss */
+.pwp-icon-quote-right:before {
+  content: "\f10e";
+}
+
+/* '' */
+/* line 109, ../sass/pwpfont.scss */
+.pwp-icon-code:before {
+  content: "\e812";
+}
+
+/* '' */
+/* line 110, ../sass/pwpfont.scss */
+.pwp-icon-star-half-alt:before {
+  content: "\e807";
+}
+
+/* '' */
+/* line 111, ../sass/pwpfont.scss */
+.pwp-icon-fork:before {
+  content: "\e820";
+}
+
+/* '' */
+/* line 112, ../sass/pwpfont.scss */
+.pwp-icon-puzzle:before {
+  content: "\e821";
+}
+
+/* '' */
+/* line 113, ../sass/pwpfont.scss */
+.pwp-icon-mic:before {
+  content: "\e817";
+}
+
+/* '' */
+/* line 114, ../sass/pwpfont.scss */
+.pwp-icon-minus-squared:before {
+  content: "\e80b";
+}
+
+/* '' */
+/* line 115, ../sass/pwpfont.scss */
+.pwp-icon-github-squared:before {
+  content: "\e803";
+}
+
+/* '' */
+/* line 116, ../sass/pwpfont.scss */
+.pwp-icon-facebook-rect:before {
+  content: "\e818";
+}
+
+/* '' */
+/* line 117, ../sass/pwpfont.scss */
+.pwp-icon-facebook-rect-1:before {
+  content: "\e81b";
+}
+
+/* '' */
+/* line 118, ../sass/pwpfont.scss */
+.pwp-icon-twitter-bird:before {
+  content: "\e819";
+}
+
+/* '' */
+/* line 119, ../sass/pwpfont.scss */
+.pwp-icon-twitter-bird-1:before {
+  content: "\e81c";
+}
+
+/* '' */
+/* line 120, ../sass/pwpfont.scss */
+.pwp-icon-twitter-squared:before {
+  content: "\e804";
+}
+
+/* '' */
+/* line 121, ../sass/pwpfont.scss */
+.pwp-icon-facebook-squared:before {
+  content: "\f308";
+}
+
+/* '' */
+/* line 122, ../sass/pwpfont.scss */
+.pwp-icon-googleplus-rect:before {
+  content: "\e81a";
+}
+
+/* '' */
+/* line 123, ../sass/pwpfont.scss */
+.pwp-icon-googleplus-rect-1:before {
+  content: "\e81d";
+}
+
+/* '' */
+/* line 124, ../sass/pwpfont.scss */
+.pwp-icon-picture:before {
+  content: "\e80f";
+}
+
+/* '' */
+/* line 125, ../sass/pwpfont.scss */
+.pwp-icon-picture-1:before {
+  content: "\e81e";
+}
+
+/* '' */
+/* line 126, ../sass/pwpfont.scss */
+.pwp-icon-user:before {
+  content: "\1f464";
+}
+
+/* '👤' */
+/* line 127, ../sass/pwpfont.scss */
+.pwp-icon-users:before {
+  content: "\e808";
+}
+
+/* '' */
+/* line 128, ../sass/pwpfont.scss */
+.pwp-icon-pin:before {
+  content: "\e811";
+}
+
+/* '' */
+/* line 129, ../sass/pwpfont.scss */
+.pwp-icon-attach-1:before {
+  content: "\e81f";
+}
+
+/* '' */
+/* line 130, ../sass/pwpfont.scss */
+.pwp-icon-attach:before {
+  content: "\e810";
+}
+
+/* '' */
+/* line 131, ../sass/pwpfont.scss */
+.pwp-icon-download:before {
+  content: "\1f4e5";
+}
+
+/* '📥' */
+/* line 132, ../sass/pwpfont.scss */
+.pwp-icon-volume-off:before {
+  content: "\1f507";
+}
+
+/* '🔇' */
+/* line 133, ../sass/pwpfont.scss */
+.pwp-icon-volume-down:before {
+  content: "\1f509";
+}
+
+/* '🔉' */
+/* line 134, ../sass/pwpfont.scss */
+.pwp-icon-volume-up:before {
+  content: "\1f50a";
+}
+
+/* '🔊' */
+/* line 135, ../sass/pwpfont.scss */
+.pwp-icon-link:before {
+  content: "\1f517";
+}
+
+/* '🔗' */
+/* line 136, ../sass/pwpfont.scss */
+.pwp-icon-wrench-1:before {
+  content: "\e802";
+}
+
+/* '' */
+/* line 137, ../sass/pwpfont.scss */
+.pwp-icon-wrench:before {
+  content: "\1f527";
+}
+
+/* '🔧' */
+/* line 138, ../sass/pwpfont.scss */
+.pwp-icon-clock:before {
+  content: "\1f554";
+}
+
+/* '🕔' */
+/* line 5, ../sass/player.scss */
+.pwp-player {
+  overflow: hidden;
+  *zoom: 1;
+  width: 590px;
+  min-height: 170px;
+  background: #2c2c2c;
+  color: #fefefe;
+  font-size: 16px;
+  font-family: "Open Sans", sans-serif;
+}
+/* line 6, ../sass/player.scss */
+.pwp-player * {
+  box-sizing: content-box;
+}
+
+/* line 19, ../sass/player.scss */
+.pwp-logo {
+  width: 100px;
+  height: 100px;
+}
+
+/* line 24, ../sass/player.scss */
+.pwp-play {
+  font-family: pwpfont;
+  font-style: normal;
+  font-weight: normal;
+  line-height: 1em;
+  speak: none;
+  color: #ffffff;
+  background: transparent;
+  float: left;
+  border: 8px solid white;
+  border-radius: 50px;
+  font-size: 36px;
+  padding: 6px 4px 12px 3px;
+  height: 32px;
+  width: 42px;
+  margin: 17px;
+  -webkit-transition: none 1s;
+  -moz-transition: none 1s;
+  -o-transition: none 1s;
+  transition: none 1s;
+}
+/* line 41, ../sass/player.scss */
+.pwp-play.pwp-icon-pause {
+  padding: 6px 7px 12px 0px;
+}
+
+/* line 47, ../sass/player.scss */
+.pwp-heading {
+  padding: 0px 10px;
+  width: 370px;
+  min-height: 100px;
+}
+/* line 52, ../sass/player.scss */
+.pwp-heading h1, .pwp-heading h2, .pwp-heading h3 {
+  font-family: "Open Sans", sans-serif;
+  font-weight: 300;
+  font-size: 17.6px;
+  line-height: 1.25em;
+  margin: 8px 0;
+}
+/* line 60, ../sass/player.scss */
+.pwp-heading h1,
+.pwp-heading h3 {
+  font-size: 13.328px;
+  font-weight: 400;
+  color: #888888;
+  margin: 0 0 10px 0;
+}
+/* line 66, ../sass/player.scss */
+.pwp-heading h1 {
+  font-size: 10.672px;
+  margin: 4px 0;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+/* line 72, ../sass/player.scss */
+.pwp-heading h2 {
+  margin: 4px 0 8px;
+}
+
+/* line 81, ../sass/player.scss */
+.pwp-logo,
+.pwp-time,
+.pwp-progress-bar,
+.pwp-buttons,
+.pwp-heading {
+  float: left;
+}
+
+/* line 86, ../sass/player.scss */
+.pwp-progress-bar,
+.pwp-time {
+  display: inline-block;
+  background: black;
+}
+
+/* line 94, ../sass/player.scss */
+.pwp-time {
+  height: 18px;
+  width: 60px;
+  padding-top: 7px;
+  padding-bottom: 5px;
+  font-size: 13.328px;
+  letter-spacing: 0.1em;
+  line-height: 1.1em;
+}
+/* line 107, ../sass/player.scss */
+.pwp-time.pwp-time-elapsed {
+  padding-left: 18px;
+  padding-right: 12px;
+}
+/* line 111, ../sass/player.scss */
+.pwp-time.pwp-time-remaining {
+  padding-left: 12px;
+  padding-right: 18px;
+}
+
+/* line 117, ../sass/player.scss */
+.pwp-progress-bar {
+  width: 410px;
+  background: black;
+  height: 30px;
+}
+
+/* line 123, ../sass/player.scss */
+.pwp-controls {
+  clear: left;
+  font-size: 10.672px;
+}
+
+/* line 129, ../sass/player.scss */
+.pwp-time-controls,
+.pwp-meta-controls {
+  list-style-type: none;
+  margin: 8px 12px;
+  /*
+  -webkit-margin-before: 0;
+  -moz-margin-before: 0;
+  -webkit-margin-after: 0;
+  -moz-margin-after: 0;
+  -webkit-margin-start: 0;
+  -moz-margin-start: 0;
+  -webkit-margin-end: 0;
+  -moz-margin-end: 0;
+  */
+  -webkit-padding-start: 0;
+  -moz-padding-start: 0;
+}
+/* line 144, ../sass/player.scss */
+.pwp-time-controls li,
+.pwp-meta-controls li {
+  margin: 0;
+  float: left;
+}
+
+/* line 150, ../sass/player.scss */
+.pwp-time-controls {
+  float: right;
+}
+
+/* line 154, ../sass/player.scss */
+.pwp-meta-controls {
+  float: left;
+}
+
+/*
+ ---------------test-----------------------------------------
+*/
+/* line 22, ../sass/podlove-web-player.scss */
+.podlovewebplayer_wrapper * {
+  font: normal 11px/1.25 helvetica, arial, sans-serif;
+  -webkit-text-size-adjust: inherit;
+}
+
+/* line 27, ../sass/podlove-web-player.scss */
+.podlovewebplayer_wrapper div {
+  display: block;
+}
+
+/* line 32, ../sass/podlove-web-player.scss */
+.podlovewebplayer_wrapper *:after,
+.podlovewebplayer_wrapper *:before {
+  content: '';
+  content: none;
+}
+
+/* line 37, ../sass/podlove-web-player.scss */
+.podlovewebplayer_wrapper a {
+  background: transparent !important;
+  text-decoration: none;
+}
+
+/* line 42, ../sass/podlove-web-player.scss */
+.podlovewebplayer_wrapper {
+  clear: both;
+  display: block;
+  position: relative;
+  padding-bottom: 1.5em;
+  background: white;
+  padding: 0px;
+  border-radius: 15px;
+  border: 0px solid black;
+}
+
+/* line 53, ../sass/podlove-web-player.scss */
+.podlovewebplayer_wrapper a, .podlovewebplayer_wrapper a:active, .podlovewebplayer_wrapper a:focus {
+  border: 0px none !important;
+  text-decoration: none !important;
+  outline: none !important;
+}
+
+/* line 59, ../sass/podlove-web-player.scss */
+.podlovewebplayer_wrapper:after {
+  content: ".";
+  color: #fff;
+  font-size: 1px;
+  height: 1px;
+  display: block;
+  overflow: hidden;
+  clear: both;
+}
+
+/* line 69, ../sass/podlove-web-player.scss */
+.podlovewebplayer_wrapper .podlovewebplayer_chapters {
+  margin: 0 !important;
+  width: 100%;
+  border-collapse: collapse;
+}
+
+/*
+ * Hide only visually, but have it available for screenreaders: h5bp.com/v
+ */
+/* line 79, ../sass/podlove-web-player.scss */
+.podlovewebplayer_wrapper .podlovewebplayer_chapters thead,
+.podlovewebplayer_wrapper .podlovewebplayer_chapters caption {
+  border: 0;
+  clip: rect(0 0 0 0);
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  padding: 0;
+  position: absolute;
+  width: 1px;
+}
+
+/* line 90, ../sass/podlove-web-player.scss */
+.podlovewebplayer_wrapper .podlovewebplayer_chapters tr {
+  color: black;
+  cursor: pointer;
+  background: -moz-linear-gradient(top, white 0%, #f2f2f2 100%);
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, white), color-stop(100%, #f2f2f2));
+  background: -webkit-linear-gradient(top, white 0%, #f2f2f2 100%);
+  background: -o-linear-gradient(top, white 0%, #f2f2f2 100%);
+  background: -ms-linear-gradient(top, white 0%, #f2f2f2 100%);
+  background: linear-gradient(to bottom, #ffffff 0%, #f2f2f2 100%);
+}
+
+/* line 101, ../sass/podlove-web-player.scss */
+.podlovewebplayer_wrapper .podlovewebplayer_chapters tr:hover {
+  background: -moz-linear-gradient(top, #efefef 0%, #d2d2d2 100%);
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #efefef), color-stop(100%, #d2d2d2));
+  background: -webkit-linear-gradient(top, #efefef 0%, #d2d2d2 100%);
+  background: -o-linear-gradient(top, #efefef 0%, #d2d2d2 100%);
+  background: -ms-linear-gradient(top, #efefef 0%, #d2d2d2 100%);
+  background: linear-gradient(to bottom, #efefef 0%, #d2d2d2 100%);
+}
+
+/* line 111, ../sass/podlove-web-player.scss */
+.podlovewebplayer_wrapper .podlovewebplayer_chapters tr.active,
+.podlovewebplayer_wrapper .podlovewebplayer_chapters tr.active:hover {
+  background: #a6c9dd;
+  background: -moz-linear-gradient(top, #a6c9dd 0%, #d8f1ff 100%);
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #a6c9dd), color-stop(100%, #d8f1ff));
+  background: -webkit-linear-gradient(top, #a6c9dd 0%, #d8f1ff 100%);
+  background: -o-linear-gradient(top, #a6c9dd 0%, #d8f1ff 100%);
+  background: -ms-linear-gradient(top, #a6c9dd 0%, #d8f1ff 100%);
+  background: linear-gradient(to bottom, #a6c9dd 0%, #d8f1ff 100%);
+}
+
+/* line 121, ../sass/podlove-web-player.scss */
+.podlovewebplayer_wrapper .podlovewebplayer_chapters tr td {
+  padding: 8px 5px 6px 5px !important;
+  vertical-align: middle;
+  border-bottom: 1px solid #e9e9e9;
+  cursor: pointer !important;
+}
+
+/* line 128, ../sass/podlove-web-player.scss */
+.podlovewebplayer_wrapper .podlovewebplayer_chapters tr:hover {
+  background: #e3e3e3;
+}
+
+/* line 132, ../sass/podlove-web-player.scss */
+.podlovewebplayer_wrapper .podlovewebplayer_chapters tr td.title {
+  padding-top: 7px;
+}
+
+/* line 136, ../sass/podlove-web-player.scss */
+.podlovewebplayer_wrapper .podlovewebplayer_chapters tr td.timecode {
+  white-space: nowrap;
+  padding-right: 10px !important;
+  text-align: right;
+}
+
+/* line 142, ../sass/podlove-web-player.scss */
+.podlovewebplayer_wrapper .podlovewebplayer_chapters tr td span {
+  text-align: right;
+}
+
+/* line 147, ../sass/podlove-web-player.scss */
+.podlovewebplayer_wrapper .podlovewebplayer_top,
+.podlovewebplayer_wrapper .podlovewebplayer_meta {
+  position: relative;
+  display: block;
+  background: #000;
+  min-height: 100px;
+  height: auto;
+  margin-bottom: 1px;
+  padding-bottom: 5px;
+  -webkit-border-top-left-radius: 10px;
+  -webkit-border-top-right-radius: 10px;
+  -moz-border-radius-topleft: 10px;
+  -moz-border-radius-topright: 10px;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  background: url(background.png);
+  background: #545454;
+  background: -moz-linear-gradient(top, #545454 0%, #262626 100%);
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #545454), color-stop(100%, #262626));
+  background: -webkit-linear-gradient(top, #545454 0%, #262626 100%);
+  background: -o-linear-gradient(top, #545454 0%, #262626 100%);
+  background: -ms-linear-gradient(top, #545454 0%, #262626 100%);
+  background: linear-gradient(to bottom, #545454 0%, #262626 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#545454',endColorstr='#262626',GradientType=0 );
+}
+
+/* line 172, ../sass/podlove-web-player.scss */
+.podlovewebplayer_top {
+  min-height: 11px !important;
+  height: 11px !important;
+  margin-bottom: 0px !important;
+  padding-bottom: 0px;
+}
+
+/* line 179, ../sass/podlove-web-player.scss */
+.mejs-container {
+  display: block;
+  position: relative;
+  margin-top: -1px;
+  background: #000000;
+}
+
+/* line 186, ../sass/podlove-web-player.scss */
+.mejs-button.mejs-volume-button button {
+  font-size: 16px;
+  background: transparent;
+  color: white;
+}
+
+/* line 191, ../sass/podlove-web-player.scss */
+.mejs-button.mejs-volume-button button::after {
+  font-size: 16;
+  padding-left: 0.02em;
+  font-family: "pwpfont" !important;
+  font-style: normal !important;
+  font-weight: normal !important;
+  text-decoration: inherit;
+  -webkit-font-smoothing: antialiased;
+  speak: none;
+  display: inline-block;
+  width: 1em;
+  margin-right: 0.2em;
+  text-align: center;
+  font-variant: normal !important;
+  text-transform: none !important;
+  line-height: 1em;
+}
+
+/* line 209, ../sass/podlove-web-player.scss */
+.mejs-button.mejs-volume-button.mejs-unmute button::after {
+  content: "\1f507";
+}
+
+/* line 213, ../sass/podlove-web-player.scss */
+.mejs-button.mejs-volume-button.mejs-mute button::after {
+  content: "\1f50a";
+}
+
+/* line 217, ../sass/podlove-web-player.scss */
+.bigplay {
+  font-family: "pwpfont" !important;
+  font-style: normal;
+  font-weight: normal;
+  line-height: 1.33em;
+  speak: none;
+  color: #ffffff;
+  background: transparent !important;
+  float: left;
+  position: relative;
+  z-index: 78;
+  border: 5px solid white !important;
+  border-radius: 60px !important;
+  font-size: 42px;
+  padding: 5px 6px 20px 19px;
+  height: 40px;
+  width: 40px;
+  margin: 10px 10px 10px 10px;
+  -webkit-transition: none;
+  -moz-transition: none;
+  -o-transition: none;
+  transition: none;
+}
+
+/* line 241, ../sass/podlove-web-player.scss */
+.bigplay:before {
+  content: "\25b6";
+  padding-left: 0.02em;
+}
+
+/* line 248, ../sass/podlove-web-player.scss */
+.podlovewebplayer_meta .bigplay:focus,
+.podlovewebplayer_meta .bigplay:hover,
+.podlovewebplayer_meta .bigplay:active {
+  border: 5px solid white !important;
+  border-radius: 60px !important;
+  -webkit-text-shadow: 0px 0px 10px #FFFFFF;
+  -moz-text-shadow: 0px 0px 10px #FFFFFF;
+  -o-text-shadow: 0px 0px 10px #FFFFFF;
+  text-shadow: 0px 0px 10px #FFFFFF;
+}
+
+/* line 257, ../sass/podlove-web-player.scss */
+.podlovewebplayer_meta .bigplay.playing:before {
+  content: "\2389";
+}
+
+/* line 261, ../sass/podlove-web-player.scss */
+.podlovewebplayer_meta .bigplay.playing {
+  padding: 5px 11px 20px 14px;
+}
+
+/* line 267, ../sass/podlove-web-player.scss */
+.podlovewebplayer_meta .bigplay.playing:focus,
+.podlovewebplayer_meta .bigplay.playing:hover,
+.podlovewebplayer_meta .bigplay.playing:active {
+  border: 5px solid white !important;
+  border-radius: 60px !important;
+  -webkit-text-shadow: 0px 0px 10px #FFFFFF;
+  -moz-text-shadow: 0px 0px 10px #FFFFFF;
+  -o-text-shadow: 0px 0px 10px #FFFFFF;
+  text-shadow: 0px 0px 10px #FFFFFF;
+}
+
+/* line 277, ../sass/podlove-web-player.scss */
+.podlovewebplayer_meta .coverart {
+  display: inline;
+}
+
+/* line 281, ../sass/podlove-web-player.scss */
+.podlovewebplayer_meta .coverart img {
+  position: relative !important;
+  float: left !important;
+  margin-top: 0px !important;
+  margin-right: 10px !important;
+  margin-left: 0px !important;
+  margin-bottom: 10px !important;
+  height: 75px !important;
+  width: auto !important;
+  max-width: 275px !important;
+  top: 10px !important;
+  left: 0px !important;
+  right: auto !important;
+  bottom: auto !important;
+  box-shadow: none !important;
+  -webkit-border-radius: 0px;
+  -moz-border-radius: 0px;
+  -o-border-radius: 0px;
+  border-radius: 0px;
+}
+
+/* line 303, ../sass/podlove-web-player.scss */
+.podlovewebplayer_meta h3 a,
+.podlovewebplayer_meta h3 {
+  clear: none;
+  color: white !important;
+  background: transparent !important;
+  padding: 7px 0 0 0;
+  font-size: 16px;
+  line-height: 22px;
+  font-weight: bold;
+  margin: 0 !important;
+  padding-right: 10px;
+  text-transform: none;
+  letter-spacing: 0;
+  text-shadow: none;
+  text-decoration: none;
+}
+
+/* line 319, ../sass/podlove-web-player.scss */
+.podlovewebplayer_meta h3 a {
+  line-height: 20px !important;
+}
+
+/* line 323, ../sass/podlove-web-player.scss */
+.podlovewebplayer_meta h3 a {
+  color: #fff;
+}
+
+/* line 329, ../sass/podlove-web-player.scss */
+.podlovewebplayer_meta h3 a:focus,
+.podlovewebplayer_meta h3 a:hover,
+.podlovewebplayer_meta h3 a:active {
+  color: #bbb !important;
+}
+
+/* line 333, ../sass/podlove-web-player.scss */
+.podlovewebplayer_meta .subtitle {
+  margin-right: 15px;
+  font-size: 12px;
+  color: #eee !important;
+  text-shadow: none !important;
+  background: transparent !important;
+  margin-left: 180px;
+  padding-bottom: 35px;
+  padding-left: 0px;
+}
+
+/* line 344, ../sass/podlove-web-player.scss */
+.podlovewebplayer_meta .subtitle strong {
+  color: #ccc;
+  font-size: 13px !important;
+}
+
+/* line 349, ../sass/podlove-web-player.scss */
+.podlovewebplayer_video.podlovewebplayer_wrapper {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* line 354, ../sass/podlove-web-player.scss */
+.podlovewebplayer_video .podlovewebplayer_meta .episodetitle {
+  text-align: left;
+  padding-left: 20px;
+}
+
+/* line 359, ../sass/podlove-web-player.scss */
+.podlovewebplayer_video .podlovewebplayer_meta .subtitle {
+  font-size: 13px;
+  float: none;
+  margin-right: 20px;
+  margin-left: 20px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+/* line 368, ../sass/podlove-web-player.scss */
+.podlovewebplayer_video .podlovewebplayer_meta {
+  min-height: 40px;
+  height: auto;
+  padding-top: 30px;
+  padding-bottom: 45px;
+  margin-bottom: 0px !important;
+  -webkit-border-top-left-radius: 0px;
+  -webkit-border-top-right-radius: 0px;
+  -moz-border-radius-topleft: 0px;
+  -moz-border-radius-topright: 0px;
+  border-top-left-radius: 0px;
+  border-top-right-radius: 0px;
+}
+
+/* line 382, ../sass/podlove-web-player.scss */
+.podlovewebplayer_video .mejs-container .mejs-inner .mejs-controls {
+  bottom: -30px;
+  z-index: 78;
+  background: initial;
+}
+
+/* line 388, ../sass/podlove-web-player.scss */
+.podlovewebplayer_video .mejs-container .mejs-inner .mejs-layers .mejs-poster.mejs-layer img {
+  width: 100%;
+  height: 100%;
+}
+
+/* line 393, ../sass/podlove-web-player.scss */
+.podlovewebplayer_wrapper.podlovewebplayer_video .mejs-container div.mejs-poster.mejs-layer {
+  display: none !important;
+}
+
+/* line 397, ../sass/podlove-web-player.scss */
+.podlovewebplayer_video .mejs-container .mejs-overlay-button {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 100px;
+  height: 100px;
+  margin: -50px 0 0 -50px;
+  background: url(bigplay.svg) no-repeat;
+}
+
+/* line 407, ../sass/podlove-web-player.scss */
+.no-svg .mejs-overlay-button {
+  background-image: url(bigplay.png);
+}
+
+/* line 411, ../sass/podlove-web-player.scss */
+.mejs-overlay:hover .mejs-overlay-button {
+  background-position: 0 -100px;
+}
+
+/* line 415, ../sass/podlove-web-player.scss */
+.mejs-overlay-loading span {
+  display: block;
+  width: 80px;
+  height: 80px;
+  background: transparent url(loading.gif) 50% 50% no-repeat;
+}
+
+/* line 422, ../sass/podlove-web-player.scss */
+.podlovewebplayer_wrapper .mejs-container .mejs-inner .mejs-controls .mejs-time-rail .mejs-time-total .mejs-time-loaded {
+  background: #4383db;
+  background: -moz-linear-gradient(top, #4383db 0%, #589cef 100%);
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #4383db), color-stop(100%, #589cef));
+  background: -webkit-linear-gradient(top, #4383db 0%, #589cef 100%);
+  background: -o-linear-gradient(top, #4383db 0%, #589cef 100%);
+  background: -ms-linear-gradient(top, #4383db 0%, #589cef 100%);
+  background: linear-gradient(to bottom, #4383db 0%, #589cef 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#cc4383db', endColorstr='#cc589cef',GradientType=0 );
+}
+
+/* line 433, ../sass/podlove-web-player.scss */
+.podlovewebplayer_wrapper .mejs-container .mejs-inner .mejs-controls .mejs-volume-button .mejs-volume-slider .mejs-volume-handle {
+  cursor: move;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+}
+
+/* line 440, ../sass/podlove-web-player.scss */
+.podlovewebplayer_wrapper .mejs-container .mejs-inner .mejs-container .mejs-controls .mejs-time span {
+  -webkit-text-shadow: 0px 0px 2px #000000;
+  -moz-text-shadow: 0px 0px 2px #000000;
+  -o-text-shadow: 0px 0px 2px #000000;
+  text-shadow: 0px 0px 2px #000000;
+  filter: dropshadow(color=black, offx=0, offy=0);
+}
+
+/* line 449, ../sass/podlove-web-player.scss */
+.podlovewebplayer_meta + .summary,
+.podlovewebplayer_wrapper .podlovewebplayer_controlbox {
+  overflow: hidden;
+  padding: 0px 10px;
+  margin-top: -1px;
+  font-size: 12px;
+  line-height: 1.5;
+  color: #fff;
+  background: #262626;
+  border-left: 3px #262626 solid;
+  border-right: 3px #262626 solid;
+  -webkit-transition: all 0.5s;
+  -moz-transition: all 0.5s;
+  -o-transition: all 0.5s;
+  transition: all 0.5s;
+}
+
+/* line 465, ../sass/podlove-web-player.scss */
+.podlovewebplayer_meta .summary .summarydiv {
+  margin: 0px 5px;
+}
+
+/* line 470, ../sass/podlove-web-player.scss */
+.podlovewebplayer_video .podlovewebplayer_meta + .summary,
+.podlovewebplayer_video.podlovewebplayer_wrapper .podlovewebplayer_controlbox {
+  margin-top: 0px;
+}
+
+/* line 474, ../sass/podlove-web-player.scss */
+.podlovewebplayer_meta + .summary.active {
+  min-height: 35px;
+  height: auto;
+  padding: 20px 10px;
+}
+
+/* line 480, ../sass/podlove-web-player.scss */
+.podlovewebplayer_wrapper .summary.active a:visited {
+  color: blue;
+}
+
+/* line 484, ../sass/podlove-web-player.scss */
+.podlovewebplayer_wrapper .summary.active a:hover {
+  text-decoration: underline;
+}
+
+/* line 488, ../sass/podlove-web-player.scss */
+.podlovewebplayer_wrapper .summary.active a {
+  text-decoration: none;
+}
+
+/* line 492, ../sass/podlove-web-player.scss */
+.podlovewebplayer_meta .togglers {
+  float: right;
+  position: relative;
+  text-align: right;
+  right: 9px;
+  top: -30px;
+  margin-bottom: -25px;
+  height: 30px;
+}
+
+/* line 502, ../sass/podlove-web-player.scss */
+.podlovewebplayer_wrapper.podlovewebplayer_video .podlovewebplayer_meta .togglers {
+  top: auto;
+  bottom: -10px;
+}
+
+/* line 507, ../sass/podlove-web-player.scss */
+.podlovewebplayer_wrapper .podlovewebplayer_controlbox {
+  height: 0px;
+  font-size: 4px;
+  text-align: center;
+  background: #0f0f0f;
+  border-left: 3px #0f0f0f solid;
+  border-right: 3px #0f0f0f solid;
+}
+
+/* line 516, ../sass/podlove-web-player.scss */
+.podlovewebplayer_wrapper .podlovewebplayer_controlbox.active {
+  height: 25px;
+  padding: 3px 10px 4px 10px;
+  font-size: 8px;
+}
+
+/* line 525, ../sass/podlove-web-player.scss */
+.podlovewebplayer_meta .togglers .infobuttons,
+.podlovewebplayer_meta .togglers .infobuttons a,
+.podlovewebplayer_wrapper .podlovewebplayer_controlbox .infobuttons,
+.podlovewebplayer_wrapper .podlovewebplayer_controlbox .infobuttons a {
+  color: #fff;
+  background: transparent !important;
+  font-size: 1.75em;
+  -webkit-text-shadow: 0px 0px 1px #000000;
+  -moz-text-shadow: 0px 0px 1px #000000;
+  -o-text-shadow: 0px 0px 1px #000000;
+  text-shadow: 0px 0px 1px #000000;
+  -webkit-font-smoothing: antialiased;
+  -moz-font-smoothing: antialiased;
+  -o-font-smoothing: antialiased;
+  font-smoothing: antialiased;
+  text-decoration: none;
+  speak: none;
+  display: inline;
+  text-decoration: none;
+  /* Animation for Buttons
+  -webkit-transition: all 0.1s ease;
+  -moz-transition: all 0.1s ease;
+  -o-transition: all 0.1s ease;
+  transition: all 0.1s ease; */
+}
+
+/* line 548, ../sass/podlove-web-player.scss */
+.podlovewebplayer_meta .togglers a.infobuttons {
+  display: inline-block !important;
+  height: 30px;
+  width: 30px;
+}
+
+/* line 554, ../sass/podlove-web-player.scss */
+.podlovewebplayer_wrapper .togglers a.pwp-icon-download {
+  display: none !important;
+}
+
+/* line 557, ../sass/podlove-web-player.scss */
+.podlovewebplayer_wrapper .podlovewebplayer_controlbox .infobuttons,
+.podlovewebplayer_wrapper .podlovewebplayer_controlbox .infobuttons a {
+  position: relative;
+  margin: 4%;
+  padding: 0px;
+  z-index: 78;
+  font-size: 2.4em;
+  font-weight: bold;
+}
+
+/* line 567, ../sass/podlove-web-player.scss */
+.podlovewebplayer_wrapper .podlovewebplayer_downloadbuttons .infobuttons,
+.podlovewebplayer_wrapper .podlovewebplayer_downloadbuttons .infobuttons a {
+  margin: 2%;
+}
+
+/* line 571, ../sass/podlove-web-player.scss */
+.podlovewebplayer_wrapper .podlovewebplayer_downloadbuttons select {
+  outline: none;
+  vertical-align: top;
+  height: 22px;
+  font-size: 14px;
+  margin-right: 25px;
+  background: #000000;
+  color: #ffffff;
+  border: #222222 1px solid;
+  -webkit-box-shadow: 0px 0px 5px 1px #4B8CF7;
+  box-shadow: 0px 0px 5px 1px #4B8CF7;
+}
+
+/* line 587, ../sass/podlove-web-player.scss */
+.podlovewebplayer_meta .togglers .infobuttons:hover,
+.podlovewebplayer_meta .togglers .infobuttons a:hover,
+.podlovewebplayer_wrapper .podlovewebplayer_controlbox .infobuttons:hover,
+.podlovewebplayer_wrapper .podlovewebplayer_controlbox .infobuttons a:hover {
+  text-shadow: 0px 0px 4px #FFFFFF;
+  text-decoration: none;
+  filter: dropshadow(color=white, offx=0, offy=0);
+  cursor: pointer;
+}
+
+/* line 594, ../sass/podlove-web-player.scss */
+.podlovewebplayer_wrapper .podlovewebplayer_controlbox .icon-twitter {
+  font-size: 2.1em;
+}
+
+/* line 600, ../sass/podlove-web-player.scss */
+.podlovewebplayer_wrapper .podlovewebplayer_controlbox .icon-link,
+.podlovewebplayer_wrapper .podlovewebplayer_controlbox .icon-twitter,
+.podlovewebplayer_wrapper .podlovewebplayer_controlbox .icon-facebook {
+  font-weight: normal;
+}
+
+/* line 604, ../sass/podlove-web-player.scss */
+.podlovewebplayer_chapters * {
+  font-size: 13px;
+}
+
+/* line 608, ../sass/podlove-web-player.scss */
+.podlovewebplayer_wrapper .podlovewebplayer_chapters tr td.chapternr {
+  min-width: 0px;
+  width: 20px;
+  padding-left: 0px;
+  text-align: center;
+}
+
+/* line 615, ../sass/podlove-web-player.scss */
+.podlovewebplayer_wrapper .podlovewebplayer_chapters tr td.starttime {
+  width: 50px;
+  text-align: right;
+}
+
+/* line 620, ../sass/podlove-web-player.scss */
+.podlovewebplayer_chapters .chapterplay {
+  width: 25px;
+  padding-right: 0;
+}
+
+/* line 625, ../sass/podlove-web-player.scss */
+.podlovewebplayer_chapters .chapterplay > a {
+  display: block;
+  border: none;
+  padding: 0;
+  margin: 0;
+  text-align: center;
+  width: 25px;
+  height: 25px;
+  background: #bbb;
+  -webkit-border-radius: 13px;
+  -moz-border-radius: 13px;
+  -o-border-radius: 13px;
+  border-radius: 13px;
+  cursor: pointer;
+  -webkit-transition: all 0.07s;
+  -moz-transition: all 0.07s;
+  -o-transition: all 0.07s;
+  transition: all 0.07s;
+}
+
+/* line 645, ../sass/podlove-web-player.scss */
+.podlovewebplayer_chapters .chapterplay > a.disabled {
+  cursor: wait;
+}
+
+/* line 649, ../sass/podlove-web-player.scss */
+.podlovewebplayer_chapters .loaded .chapterplay > a {
+  background: #000;
+}
+
+/* line 659, ../sass/podlove-web-player.scss */
+.podlovewebplayer_chapters .chapterplay > a:focus,
+.podlovewebplayer_chapters .chapterplay > a:hover,
+.podlovewebplayer_chapters .chapterplay > a:active,
+.podlovewebplayer_chapters .active .chapterplay > a,
+.podlovewebplayer_chapters .loaded .chapterplay > a:focus,
+.podlovewebplayer_chapters .loaded .chapterplay > a:hover,
+.podlovewebplayer_chapters .loaded .chapterplay > a:active {
+  background: #3a859a;
+  cursor: pointer;
+}
+
+/* line 666, ../sass/podlove-web-player.scss */
+.podlovewebplayer_chapters .chapterplay a.disabled:focus,
+.podlovewebplayer_chapters .chapterplay a.disabled:hover,
+.podlovewebplayer_chapters .chapterplay a.disabled:active {
+  background: #eee;
+  cursor: wait;
+}
+
+/* line 671, ../sass/podlove-web-player.scss */
+.podlovewebplayer_chapters .chapterplay a[rel=player] span {
+  display: block !important;
+  width: 14px;
+  height: 16px;
+  overflow: hidden;
+  position: relative;
+  top: 4px;
+  text-indent: -1000px;
+  margin: 0 0 0 6px;
+  background: transparent url(controls.png) no-repeat 0 0;
+  background-image: url(controls.svg);
+}
+
+/* line 685, ../sass/podlove-web-player.scss */
+.podlovewebplayer_chapters .paused .chapterplay a[rel=player] span {
+  background-position: 0 0 !important;
+}
+
+/* line 689, ../sass/podlove-web-player.scss */
+.podlovewebplayer_chapters tr.chaptertr:active {
+  color: #ffffff;
+  -webkit-text-shadow: 0px 0px 3px #111111;
+  -moz-text-shadow: 0px 0px 3px #111111;
+  text-shadow: 0px 0px 3px #111111;
+  background: #ffffff;
+  background: -moz-linear-gradient(top, white 0%, #f6f6f6 47%, #ededed 100%);
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, white), color-stop(47%, #f6f6f6), color-stop(100%, #ededed));
+  background: -webkit-linear-gradient(top, white 0%, #f6f6f6 47%, #ededed 100%);
+  background: -o-linear-gradient(top, white 0%, #f6f6f6 47%, #ededed 100%);
+  background: -ms-linear-gradient(top, white 0%, #f6f6f6 47%, #ededed 100%);
+  background: linear-gradient(to bottom, #ffffff 0%, #f6f6f6 47%, #ededed 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffff', endColorstr='#ededed',GradientType=0 );
+}
+
+/* line 704, ../sass/podlove-web-player.scss */
+.podlovewebplayer_chapters td b {
+  color: #000;
+  font-weight: bolder;
+}
+
+/* line 709, ../sass/podlove-web-player.scss */
+.podlovewebplayer_chapters td a {
+  color: #3297ff;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+/* line 715, ../sass/podlove-web-player.scss */
+.podlovewebplayer_wrapper .podlovewebplayer_chapterbox {
+  display: block;
+  height: auto;
+  border: 3px #0f0f0f solid;
+  border-bottom: 0px #0f0f0f solid;
+  border-top: 0px;
+  overflow-y: hidden;
+  -webkit-transition: all 0.5s;
+  -moz-transition: all 0.5s;
+  -o-transition: all 0.5s;
+  transition: all 0.5s;
+}
+
+/* line 728, ../sass/podlove-web-player.scss */
+.podlovewebplayer_wrapper .podlovewebplayer_chapterbox .podlovewebplayer_chapters tr td {
+  font-weight: bolder;
+}
+
+/* line 732, ../sass/podlove-web-player.scss */
+.podlovewebplayer_wrapper .podlovewebplayer_chapterbox .podlovewebplayer_chapters tr td span {
+  font-weight: normal;
+}
+
+/* line 737, ../sass/podlove-web-player.scss */
+.podlovewebplayer_wrapper .podlovewebplayer_chapterbox .timecode span,
+.podlovewebplayer_wrapper .podlovewebplayer_chapterbox .starttime span {
+  text-align: right;
+}
+
+/* line 741, ../sass/podlove-web-player.scss */
+.podlovewebplayer_wrapper .podlovewebplayer_tableend {
+  position: initial;
+  display: block;
+  height: 11px;
+  left: 0px;
+  background: #0f0f0f;
+  -webkit-box-shadow: 0px 1px #0f0f0f;
+  -moz-box-shadow: 0px 1px #0f0f0f;
+  box-shadow: 0px 1px #0f0f0f;
+  -webkit-border-bottom-left-radius: 10px;
+  -webkit-border-bottom-right-radius: 10px;
+  -moz-border-radius-bottomleft: 10px;
+  -moz-border-radius-bottomright: 10px;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+}
+
+/* line 760, ../sass/podlove-web-player.scss */
+.podlovewebplayer_wrapper.podlovewebplayer_video .podlovewebplayer_tableend,
+.podlovewebplayer_wrapper.podlovewebplayer_video .podlovewebplayer_controlbox,
+.podlovewebplayer_wrapper.podlovewebplayer_video .summary {
+  background: #252525;
+}
+
+/* line 767, ../sass/podlove-web-player.scss */
+.podlovewebplayer_wrapper.podlovewebplayer_video .podlovewebplayer_chapterbox,
+.podlovewebplayer_wrapper.podlovewebplayer_video .podlovewebplayer_chapters,
+.podlovewebplayer_wrapper.podlovewebplayer_video .podlovewebplayer_meta + .summary,
+.podlovewebplayer_wrapper.podlovewebplayer_video .podlovewebplayer_controlbox {
+  border-color: #252525;
+}
+
+/* line 771, ../sass/podlove-web-player.scss */
+.podlovewebplayer_wrapper.podlovewebplayer_video .podlovewebplayer_controlbox {
+  margin-top: 0px;
+}
+
+/* line 775, ../sass/podlove-web-player.scss */
+.podlovewebplayer_smallplayer .mejs-controls .mejs-time-rail .mejs-time-float {
+  z-index: 100;
+}
+
+/* line 779, ../sass/podlove-web-player.scss */
+.podlovewebplayer_smallplayer .podlovewebplayer_meta .bigplay {
+  font-size: 25px;
+  padding: 6px 11px 19px 14px;
+  height: 20px;
+  width: 20px;
+  margin: 10px 10px 0px 10px;
+  border: 4px solid #ffffff !important;
+}
+
+/* line 788, ../sass/podlove-web-player.scss */
+.podlovewebplayer_smallplayer .podlovewebplayer_meta .bigplay.playing {
+  padding: 6px 13px 19px 12px;
+}
+
+/* line 794, ../sass/podlove-web-player.scss */
+.podlovewebplayer_smallplayer .bigplay.playing:focus,
+.podlovewebplayer_smallplayer .bigplay.playing:hover,
+.podlovewebplayer_smallplayer .bigplay.playing:active {
+  border: 4px solid white !important;
+}
+
+/* line 799, ../sass/podlove-web-player.scss */
+.podlovewebplayer_smallplayer .podlovewebplayer_top,
+.podlovewebplayer_smallplayer .podlovewebplayer_meta {
+  min-height: 60px;
+}
+
+@media only screen and (max-width: 500px) {
+  /* line 804, ../sass/podlove-web-player.scss */
+  .podlovewebplayer_wrapper {
+    margin-left: 0px;
+    margin-right: 0px;
+  }
+
+  /* line 808, ../sass/podlove-web-player.scss */
+  .podlovewebplayer_meta {
+    -webkit-border-top-left-radius: 0px !important;
+    -webkit-border-top-right-radius: 0px !important;
+    -moz-border-radius-topleft: 0px !important;
+    -moz-border-radius-topright: 0px !important;
+    border-top-left-radius: 0px !important;
+    border-top-right-radius: 0px !important;
+  }
+
+  /* line 817, ../sass/podlove-web-player.scss */
+  .podlovewebplayer_meta .subtitle {
+    position: initial;
+    left: 10px;
+    right: 10px;
+  }
+
+  /* line 823, ../sass/podlove-web-player.scss */
+  .podlovewebplayer_wrapper .podlovewebplayer_controlbox a.infobuttons {
+    margin: 4%;
+    white-space: nowrap;
+  }
+
+  /* line 828, ../sass/podlove-web-player.scss */
+  .podlovewebplayer_wrapper .podlovewebplayer_controlbox.active {
+    height: auto !important;
+  }
+
+  /* line 832, ../sass/podlove-web-player.scss */
+  .podlovewebplayer_wrapper .podlovewebplayer_controlbox .infobuttons span {
+    font-size: 13pt;
+  }
+
+  /* line 837, ../sass/podlove-web-player.scss */
+  .podlovewebplayer_wrapper .podlovewebplayer_tableend,
+  .podlovewebplayer_wrapper .podlovewebplayer_top {
+    -webkit-border-top-left-radius: 0px;
+    -webkit-border-top-right-radius: 0px;
+    -moz-border-radius-topleft: 0px;
+    -moz-border-radius-topright: 0px;
+    border-top-left-radius: 0px;
+    border-top-right-radius: 0px;
+    -webkit-border-bottom-left-radius: 0px;
+    -webkit-border-bottom-right-radius: 0px;
+    -moz-border-radius-bottomleft: 0px;
+    -moz-border-radius-bottomright: 0px;
+    border-bottom-left-radius: 0px;
+    border-bottom-right-radius: 0px;
+  }
+}
