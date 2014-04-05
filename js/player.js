@@ -14,6 +14,7 @@ var startAtTime = false,
   generateTimecode = require('./timecode').generate,
   parseTimecode = require('./timecode').parse,
   handleCookies = require('./cookie'),
+  $$ = require('./media.js').wrap,
   checkCurrentURL = function () {
     var deepLink = require('./url').checkCurrent ();
     if (!deepLink) { return; }
@@ -77,7 +78,7 @@ var startAtTime = false,
    * @param {object} wrapper
    */
   addBehavior = function (player, params, wrapper) {
-    var jqPlayer = $(player),
+    var jqPlayer = $$(player),
       layoutedPlayer = jqPlayer,
       canplay = false,
       metaElement,
@@ -157,14 +158,7 @@ var startAtTime = false,
             // setFragmentURL('t=' + generateTimecode([startTime, endTime]));
             setFragmentURL('t=' + generateTimecode([startTime]));
           } else {
-            if (canplay) {
-              // Basic Chapter Mark function (without deeplinking)
-              player.setCurrentTime(startTime);
-            } else {
-              jqPlayer.one('canplay', function () {
-                player.setCurrentTime(startTime);
-              });
-            }
+            jqPlayer.play(startTime);
           }
           // flash fallback needs additional pause
           if (player.pluginType === 'flash') {
@@ -387,7 +381,7 @@ $.fn.podlovewebplayer = function (options) {
       }
       orig = player;
       player = $(player).clone().wrap('<div class="podlovewebplayer_wrapper" style="width: ' + params.width + '"></div>')[0];
-      jqPlayer = $(player);
+      jqPlayer = $$(player);
       wrapper = jqPlayer.parent();
       players.push(player);
       //add params from html fallback area and remove them from the DOM-tree
@@ -501,20 +495,18 @@ $.fn.podlovewebplayer = function (options) {
       timeControlElement.append(rewindButton);
       rewindButton.click(function (evt) {
         evt.preventDefault();
-        if (playerStarted(player)) {
-          return player.setCurrentTime(player.currentTime - 30);
-        }
-        return player.play();
+        jqPlayer.play(function (time) {
+          return time - 30;
+        });
       });
 
       var forwardButton = tabs.createToggleButton("pwp-icon-fast-fw", "Fast forward 30 seconds");
       timeControlElement.append(forwardButton);
       forwardButton.click(function (evt) {
         evt.preventDefault();
-        if (playerStarted(player)) {
-          return player.setCurrentTime(player.currentTime + 30);
-        }
-        return player.play();
+        jqPlayer.play(function (time) {
+          return time + 30;
+        });
       });
 
       /**
@@ -610,11 +602,7 @@ $.fn.podlovewebplayer = function (options) {
         console.debug(params);
         storageKey = params.permalink;
         if (handleCookies.getItem(storageKey)) {
-          jqPlayer.one('canplay', function () {
-            var time = handleCookies.getItem(storageKey);
-            console.debug(time);
-            this.currentTime = time;
-          });
+          jqPlayer.play(handleCookies.getItem(storageKey));
         }
       }
       
