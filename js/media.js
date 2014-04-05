@@ -7,7 +7,8 @@ var methods = {
 
 		return this.each(function(){
 			var player = $(this),
-				old = player.prop('currentTime'), neu;
+				old = player.prop('currentTime'),
+				neu = time;
 
 			if ( typeof time == 'function'){
 				neu = time(old);
@@ -19,9 +20,9 @@ var methods = {
 
 			if( this.setCurrentTime ){
 				// mediaelement.js fallback
-				this.setCurrentTime( neu);
+				this.setCurrentTime( +neu);
 			} else {
-				player.prop('currentTime', neu);
+				player.prop('currentTime', +neu);
 			}			
 		});
 	},

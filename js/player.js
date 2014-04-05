@@ -79,7 +79,6 @@ var startAtTime = false,
    */
   addBehavior = function (player, params, wrapper) {
     var jqPlayer = $$(player),
-      layoutedPlayer = jqPlayer,
       canplay = false,
       metaElement,
       list,
@@ -102,11 +101,7 @@ var startAtTime = false,
       // check if deeplink is set
       checkCurrentURL();
     }
-    // get things straight for flash fallback
-    if (player.pluginType === 'flash') {
-      layoutedPlayer = $('#mep_' + player.id.substring(9));
-      console.log(layoutedPlayer);
-    }
+    
     // cache some jQ objects
     metaElement = wrapper.find('.podlovewebplayer_meta');
     list = wrapper.find('table');
@@ -115,33 +110,19 @@ var startAtTime = false,
 
     if (metaElement.length === 1) {
       metaElement.find('.bigplay').on('click', function () {
-        var $this = $(this);
-        if (!$this.hasClass('bigplay')) {
-          return false;
-        }
-        var playButton = $this.parent().find('.bigplay');
-        if ((typeof player.currentTime === 'number') && (player.currentTime > 0)) {
-          if (player.paused) {
-            playButton.addClass('playing');
-            player.play();
-          } else {
-            playButton.removeClass('playing');
-            player.pause();
-          }
-        } else {
-          if (!playButton.hasClass('playing')) {
-            playButton.addClass('playing');
-            $this.parent().parent().find('.mejs-time-buffering').show();
-          }
-          // flash fallback needs additional pause
-          if (player.pluginType === 'flash') {
-            player.pause();
-          }
+        if (player.paused) {
           player.play();
+        } else {
+          player.pause();
         }
       });
 
-
+      jqPlayer.on('play playing', function(){
+        metaElement.find('.bigplay').addClass('playing');
+        $(this).parent().parent().find('.mejs-time-buffering').show();
+      }).on('pause', function(){
+        metaElement.find('.bigplay').removeClass('playing');
+      });
     }
 
     // chapters list
@@ -152,19 +133,8 @@ var startAtTime = false,
           e.preventDefault();
           var mark = $(this).closest('tr'),
             startTime = mark.data('start');
-          //endTime = mark.data('end');
-          // If there is only one player also set deepLink
-          if (players.length === 1) {
-            // setFragmentURL('t=' + generateTimecode([startTime, endTime]));
-            setFragmentURL('t=' + generateTimecode([startTime]));
-          } else {
-            jqPlayer.play(startTime);
-          }
-          // flash fallback needs additional pause
-          if (player.pluginType === 'flash') {
-            player.pause();
-          }
-          player.play();
+          
+          jqPlayer.play(startTime);
         }
         return false;
       });
@@ -200,47 +170,35 @@ var startAtTime = false,
         // bind seeked to addressCurrentTime
         checkCurrentURL();
         // handle browser history navigation
-        jQuery(window).bind('hashchange onpopstate', function (e) {
+        /*jQuery(window).bind('hashchange onpopstate', function (e) {
           if (!ignoreHashChange) {
             checkCurrentURL();
           }
           ignoreHashChange = false;
-        });
+        }); */
       }
     });
     // always update Chaptermarks though
     jqPlayer
       .on('timeupdate', function () {
         updateChapterMarks(player, marks);
+        if (players.length === 1) {
+          ignoreHashChange = true;
+          console.debug('time', generateTimecode([player.currentTime, false]));
+          window.location.replace('#t=' + generateTimecode([player.currentTime, false]));
+        }
+        console.debug(player.currentTime);
+        handleCookies.setItem(params.permalink, player.currentTime);
       })
       // update play/pause status
       .on('play playing', function () {
-        if (!player.persistingTimer) {
-          embed.postToOpener({
-            action: 'play',
-            arg: player.currentTime
-          });
-          player.persistingTimer = window.setInterval(function () {
-            if (players.length === 1) {
-              ignoreHashChange = true;
-              console.debug('time', generateTimecode([player.currentTime, false]));
-              window.location.replace('#t=' + generateTimecode([player.currentTime, false]));
-            }
-            console.debug(player.currentTime);
-            handleCookies.setItem(params.permalink, player.currentTime);
-          }, 5000);
-        }
+        embed.postToOpener({
+          action: 'play',
+          arg: player.currentTime
+        });
         list.find('.paused').removeClass('paused');
-        if (metaElement.length === 1) {
-          metaElement.find('.bigplay').addClass('playing');
-        }
       })
       .on('pause', function () {
-        window.clearInterval(player.persistingTimer);
-        player.persistingTimer = null;
-        if (metaElement.length === 1) {
-          metaElement.find('.bigplay').removeClass('playing');
-        }
         embed.postToOpener({
           action: 'pause',
           arg: player.currentTime
@@ -470,24 +428,20 @@ $.fn.podlovewebplayer = function (options) {
         timeControlElement.append(prevButton);
         prevButton.click(function (evt) {
           evt.preventDefault();
-          if (playerStarted(player)) {
+          jqPlayer.play(function (time) {
             var activeChapter = chapterBox.find('.active');
             if (player.currentTime > activeChapter.data('start') + 10) {
-              return player.setCurrentTime(activeChapter.data('start'));
+              return activeChapter.data('start');
             }
-            return player.setCurrentTime(activeChapter.prev().data('start'));
-          }
-          return player.play();
+            return activeChapter.prev().data('start');
+          });
         });
 
         var nextButton = tabs.createToggleButton("pwp-icon-to-end", "Jump to next chapter");
         timeControlElement.append(nextButton);
         nextButton.click(function (evt) {
           evt.preventDefault();
-          if (playerStarted(player)) {
-            player.setCurrentTime(chapterBox.find('.active').next().data('start'));
-          }
-          return player.play();
+          jqPlayer.play(chapterBox.find('.active').next().data('start'));
         });
       }
 
@@ -621,22 +575,22 @@ $.fn.podlovewebplayer = function (options) {
     });
   };
 
-  /**
-   * player error handling function
-   * will remove the topmost mediafile from src or source list
-   * possible fix for Firefox AAC issues
-   */
-  function removeUnplayableMedia() {
-    var $this = $(this);
-    if ($this.attr('src')) {
-      $this.removeAttr('src');
-      return;
-    }
-    var sourceList = $this.children('source');
-    if (sourceList.length) {
-      sourceList.first().remove();
-    }
+/**
+ * player error handling function
+ * will remove the topmost mediafile from src or source list
+ * possible fix for Firefox AAC issues
+ */
+function removeUnplayableMedia() {
+  var $this = $(this);
+  if ($this.attr('src')) {
+    $this.removeAttr('src');
+    return;
   }
+  var sourceList = $this.children('source');
+  if (sourceList.length) {
+    sourceList.first().remove();
+  }
+}
 
 function isHidden() {
   var props = [
