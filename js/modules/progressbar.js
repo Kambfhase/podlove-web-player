@@ -26,7 +26,7 @@ ProgressBar.prototype.update = function(timeline) {
 	console.log('ProgressBar','update', time);
 
 	this.cache.filter('progress').val(time);
-	this.cache.filter('#currentTime').html(tc.generate([time], true));
+	this.cache.filter('#currentTime').html(tc.generate([~~time], true));
 };
 
 /**
@@ -45,9 +45,11 @@ ProgressBar.prototype.render = function () {
 	cache.filter('.progress').attr({
 		min: 0,
 		max: this.params.duration
+	}).on('click', function (event){
+		console.log(event);
 	});
 
-	cache.filter('#duration').html(tc.generate([this.params.duration], false));
+	cache.filter('#duration').html(tc.generate([~~this.params.duration], false));
 
 	return cache;
 };
